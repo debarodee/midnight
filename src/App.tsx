@@ -11,6 +11,9 @@ import Domains from './pages/Domains';
 import Assistant from './pages/Assistant';
 import Journal from './pages/Journal';
 import Settings from './pages/Settings';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
+import FAQ from './pages/FAQ';
 import Layout from './components/Layout';
 import { onAuthChange, createUserDocument, handleRedirectResult } from './lib/firebase';
 
@@ -103,6 +106,11 @@ function App() {
           path="/login/email" 
           element={isAuthenticated ? <Navigate to="/app" replace /> : <EmailAuth />} 
         />
+        
+        {/* Legal/Info pages */}
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/faq" element={<FAQ />} />
         
         {/* Protected routes */}
         <Route 
