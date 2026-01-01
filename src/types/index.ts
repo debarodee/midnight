@@ -7,6 +7,15 @@ export interface User {
   photoURL?: string;
   createdAt: Date;
   settings: UserSettings;
+  hasCompletedOnboarding?: boolean;
+  onboarding?: OnboardingData | null;
+}
+
+export interface OnboardingData {
+  mindfulnessLevel: number;      // 0-100 from slider
+  evolutionPath: string | null;  // 'architect' | 'athlete' | 'sage' | 'creator' | null
+  displayName: string;
+  completedAt: Date | null;
 }
 
 export interface UserSettings {

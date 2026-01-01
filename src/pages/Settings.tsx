@@ -96,8 +96,8 @@ const Settings = () => {
               {user?.displayName?.charAt(0) || 'U'}
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold text-obsidian dark:text-white">{user?.displayName || 'Demo User'}</h3>
-              <p className="text-sm text-obsidian-400 dark:text-obsidian-300">{user?.email || 'demo@metruth.app'}</p>
+              <h3 className="font-semibold text-obsidian dark:text-white">{user?.displayName || 'User'}</h3>
+              <p className="text-sm text-obsidian-400 dark:text-obsidian-300">{user?.email || ''}</p>
             </div>
             <ChevronRight className="w-5 h-5 text-obsidian-300 dark:text-obsidian-400" />
           </div>

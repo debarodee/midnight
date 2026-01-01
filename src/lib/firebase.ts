@@ -34,7 +34,6 @@ import {
   deleteDoc,
   serverTimestamp,
 } from 'firebase/firestore';
-import { shouldSkipFirestore } from '../stores/authStore';
 
 // Firebase configuration - REPLACE WITH YOUR VALUES
 const firebaseConfig = {
@@ -240,11 +239,6 @@ export const onAuthChange = (callback: (user: FirebaseUser | null) => void) => {
 
 // Firestore helpers
 export const createUserDocument = async (user: FirebaseUser) => {
-  if (shouldSkipFirestore()) {
-    console.log('[Demo Mode] Skipping user document creation');
-    return null;
-  }
-  
   const userRef = doc(db, 'users', user.uid);
   const userSnap = await getDoc(userRef);
   
@@ -254,6 +248,8 @@ export const createUserDocument = async (user: FirebaseUser) => {
       displayName: user.displayName,
       photoURL: user.photoURL,
       createdAt: serverTimestamp(),
+      hasCompletedOnboarding: false,
+      onboarding: null,
       settings: {
         theme: 'light',
         notifications: true,
@@ -266,25 +262,37 @@ export const createUserDocument = async (user: FirebaseUser) => {
 };
 
 export const getUserDocument = async (userId: string) => {
-  if (shouldSkipFirestore()) {
-    console.log('[Demo Mode] Skipping user document fetch');
-    return null;
-  }
-  
   const userRef = doc(db, 'users', userId);
   const userSnap = await getDoc(userRef);
   return userSnap.exists() ? userSnap.data() : null;
 };
 
-// Generic Firestore operations with demo mode guard
+// Onboarding helpers
+export const saveOnboardingData = async (
+  userId: string, 
+  onboardingData: {
+    mindfulnessLevel: number;
+    evolutionPath: string | null;
+    displayName: string;
+    completedAt: Date | null;
+  }
+) => {
+  const userRef = doc(db, 'users', userId);
+  await updateDoc(userRef, {
+    onboarding: {
+      ...onboardingData,
+      completedAt: onboardingData.completedAt ? serverTimestamp() : null,
+    },
+    hasCompletedOnboarding: true,
+    displayName: onboardingData.displayName,
+    updatedAt: serverTimestamp(),
+  });
+};
+
+// Generic Firestore operations
 export const firestoreService = {
   // Create
   async create<T extends object>(collectionName: string, data: T, id?: string) {
-    if (shouldSkipFirestore()) {
-      console.log('[Demo Mode] Skipping Firestore create:', collectionName);
-      return 'demo-' + Date.now();
-    }
-    
     const ref = id 
       ? doc(db, collectionName, id)
       : doc(collection(db, collectionName));
@@ -298,11 +306,6 @@ export const firestoreService = {
 
   // Read one
   async getOne(collectionName: string, id: string) {
-    if (shouldSkipFirestore()) {
-      console.log('[Demo Mode] Skipping Firestore read:', collectionName, id);
-      return null;
-    }
-    
     const ref = doc(db, collectionName, id);
     const snap = await getDoc(ref);
     return snap.exists() ? { id: snap.id, ...snap.data() } : null;
@@ -310,11 +313,6 @@ export const firestoreService = {
 
   // Read many by user
   async getByUser(collectionName: string, userId: string) {
-    if (shouldSkipFirestore()) {
-      console.log('[Demo Mode] Skipping Firestore query:', collectionName);
-      return [];
-    }
-    
     const q = query(
       collection(db, collectionName),
       where('userId', '==', userId)
@@ -325,11 +323,6 @@ export const firestoreService = {
 
   // Update
   async update(collectionName: string, id: string, data: object) {
-    if (shouldSkipFirestore()) {
-      console.log('[Demo Mode] Skipping Firestore update:', collectionName, id);
-      return;
-    }
-    
     const ref = doc(db, collectionName, id);
     await updateDoc(ref, {
       ...data,
@@ -339,11 +332,6 @@ export const firestoreService = {
 
   // Delete
   async delete(collectionName: string, id: string) {
-    if (shouldSkipFirestore()) {
-      console.log('[Demo Mode] Skipping Firestore delete:', collectionName, id);
-      return;
-    }
-    
     const ref = doc(db, collectionName, id);
     await deleteDoc(ref);
   },
