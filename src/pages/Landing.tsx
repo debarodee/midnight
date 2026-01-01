@@ -1,198 +1,206 @@
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Star, Calendar, Target, Heart, DollarSign, Home, Car } from 'lucide-react';
-import { useAuthStore, createDemoUser } from '../stores/authStore';
-import { useNavigate } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { useNavigate, Link } from 'react-router-dom';
 import Logo from '../components/common/Logo';
 
+const features = [
+  {
+    title: 'Keep Track of Your Health',
+    description: 'Set reminders for checkups, track prescriptions, store doctor info, and jot down personal health notes — all in one secure place.',
+  },
+  {
+    title: 'Never Miss a Deadline',
+    description: 'Get reminders for car maintenance, registration renewals, and bills. Stay ahead without the mental load.',
+  },
+  {
+    title: 'Stay on Top of Your Budget',
+    description: 'Track bills and upcoming paychecks without connecting your bank. See what\'s due before your next pay.',
+  },
+  {
+    title: 'Your Goals, Your Way',
+    description: 'Set meaningful goals, track progress, and get AI-powered suggestions to keep momentum going.',
+  },
+  {
+    title: 'Journal Your Journey',
+    description: 'Daily journaling with mood tracking, tags, and prompts. Reflect on wins and work through challenges.',
+  },
+  {
+    title: 'AI Life Assistant',
+    description: 'Ask anything — productivity tips, adulting advice, or help prioritizing your day. Context-aware and private.',
+  },
+];
+
+const mockups = [
+  { src: '/mockup-dashboard.png', alt: 'Dashboard view showing tasks and life domains' },
+  { src: '/mockup-assistant.png', alt: 'AI Assistant providing personalized guidance' },
+  { src: '/mockup-journal.png', alt: 'Journal with mood tracking and tags' },
+];
+
 const Landing = () => {
-  const { setUser } = useAuthStore();
   const navigate = useNavigate();
+
+  const handleSignUp = () => {
+    navigate('/login/email');
+  };
 
   const handleSignIn = () => {
     navigate('/login');
   };
 
-  const handleDemoLogin = () => {
-    const demoUser = createDemoUser();
-    setUser(demoUser, true); // Pass true for demo mode
-    navigate('/app');
-  };
-
-  const features = [
-    { icon: Target, title: 'Goal Tracking', desc: 'Set and crush your 2025 goals' },
-    { icon: Calendar, title: 'Smart Reminders', desc: 'Never miss important dates' },
-    { icon: Heart, title: 'Health', desc: 'Appointments & wellness tracking' },
-    { icon: DollarSign, title: 'Finances', desc: 'Bills, budgets & subscriptions' },
-    { icon: Home, title: 'Home', desc: 'Maintenance schedules & tasks' },
-    { icon: Car, title: 'Auto', desc: 'Registration, insurance & upkeep' },
-  ];
-
-  const getYearProgress = () => {
-    const now = new Date();
-    const startOfYear = new Date(now.getFullYear(), 0, 1);
-    const endOfYear = new Date(now.getFullYear() + 1, 0, 1);
-    const total = endOfYear.getTime() - startOfYear.getTime();
-    const elapsed = now.getTime() - startOfYear.getTime();
-    return Math.round((elapsed / total) * 100);
-  };
-
   return (
-    <div className="min-h-screen bg-obsidian-800 overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan/5 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-lavender/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan/3 rounded-full blur-3xl" />
-        
-        {/* Stars */}
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white/40 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              opacity: [0.2, 1, 0.2],
-              scale: [1, 1.5, 1],
-            }}
-            transition={{
-              duration: 2 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-      </div>
+    <div className="min-h-screen bg-obsidian-800 text-white">
+      {/* Section 1: Header */}
+      <header className="pt-12 pb-8 px-6 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex flex-col items-center"
+        >
+          <Logo size="xl" variant="light" className="mb-6" />
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
+            M.E. Truth
+          </h1>
+          <p className="text-xl text-cyan font-medium">
+            Mindful Evolution
+          </p>
+        </motion.div>
+      </header>
 
-      {/* Content */}
-      <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Header */}
-        <header className="px-6 py-4 flex items-center justify-between safe-top safe-x">
-          <Logo size="md" variant="light" />
-        </header>
+      {/* Section 2: Value Proposition */}
+      <section className="px-6 py-12 max-w-3xl mx-auto text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="text-lg md:text-xl text-white/80 leading-relaxed"
+        >
+          Finally, an app that is <em className="text-cyan font-medium not-italic">actually</em> all-in-one. 
+          AI-powered assistance, no ads, no tracking — your data stays yours.
+        </motion.p>
+      </section>
 
-        {/* Hero */}
-        <main className="flex-1 flex flex-col items-center justify-center px-6 py-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center max-w-2xl mx-auto"
-          >
-            {/* Year progress indicator */}
+      {/* Section 3: Feature Blocks */}
+      <section className="px-6 py-12 max-w-2xl mx-auto">
+        <div className="space-y-8">
+          {features.map((feature, index) => (
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 mb-8"
+              key={feature.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 + index * 0.1, duration: 0.5 }}
+              className="text-center md:text-left"
             >
-              <Star className="w-4 h-4 text-cyan" />
-              <span className="text-white/80 text-sm">
-                {getYearProgress()}% through 2025 — make it count
-              </span>
+              <h3 className="text-xl font-bold text-cyan mb-2">
+                {feature.title}
+              </h3>
+              <p className="text-white/70 leading-relaxed">
+                {feature.description}
+              </p>
             </motion.div>
+          ))}
+        </div>
+      </section>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
-            >
-              The Science of{' '}
-              <span className="gradient-text">Mindful Evolution</span>
-            </motion.h1>
+      {/* Section 4: Download CTA */}
+      <section className="px-6 py-16 text-center bg-obsidian-700/50">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.5 }}
+          className="max-w-md mx-auto"
+        >
+          <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 tracking-wide">
+            GET MOMENTOUS YEAR
+          </h2>
+          <p className="text-white/60 mb-6">
+            Available on Web • iOS coming soon
+          </p>
+          
+          {/* Pricing */}
+          <div className="mb-8">
+            <p className="text-3xl font-bold text-white mb-1">
+              Just $2.99/year
+            </p>
+            <p className="text-cyan text-lg">
+              or $14.99 Lifetime
+            </p>
+          </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="text-xl text-white/60 mb-10 max-w-lg mx-auto"
-            >
-              One beautiful app to manage your goals, habits, health, finances, and life. 
-              Designed for fresh starts and meaningful progress.
-            </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
-              <button
-                onClick={handleSignIn}
-                className="btn-cyan group w-full sm:w-auto"
-              >
-                <Sparkles className="w-5 h-5 mr-2" />
-                Sign In
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </button>
-              
-              <button
-                onClick={handleDemoLogin}
-                className="px-6 py-3 text-white/80 font-medium hover:text-white transition-colors w-full sm:w-auto"
-              >
-                Try Demo Mode
-              </button>
-            </motion.div>
-          </motion.div>
-
-          {/* Feature grid */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.6 }}
-            className="mt-20 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto"
+          {/* Buttons */}
+          <button
+            onClick={handleSignUp}
+            className="w-full btn-cyan text-lg py-4 mb-4 group"
           >
-            {features.map((feature, i) => (
+            Sign Up — 7 Day FREE Trial
+            <ArrowRight className="w-5 h-5 ml-2 inline group-hover:translate-x-1 transition-transform" />
+          </button>
+          
+          <p className="text-white/50">
+            Already have an account?{' '}
+            <button
+              onClick={handleSignIn}
+              className="text-cyan hover:text-cyan-400 font-medium underline underline-offset-2"
+            >
+              Sign In
+            </button>
+          </p>
+        </motion.div>
+      </section>
+
+      {/* Section 5: App Screenshots */}
+      <section className="py-16 overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.5 }}
+        >
+          <h3 className="text-center text-white/40 text-sm uppercase tracking-widest mb-8">
+            See it in action
+          </h3>
+          
+          {/* Horizontal scroll container */}
+          <div className="flex gap-6 px-6 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide justify-center">
+            {mockups.map((mockup, index) => (
               <motion.div
-                key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 + i * 0.1 }}
-                className="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 
-                           hover:bg-white/10 hover:border-cyan/30 transition-all duration-300
-                           cursor-default group"
+                key={mockup.src}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.1 + index * 0.15, duration: 0.5 }}
+                className="flex-shrink-0 snap-center"
               >
-                <feature.icon className="w-6 h-6 text-cyan mb-3 group-hover:scale-110 transition-transform" />
-                <h3 className="text-white font-medium text-sm mb-1">{feature.title}</h3>
-                <p className="text-white/40 text-xs">{feature.desc}</p>
+                <img
+                  src={mockup.src}
+                  alt={mockup.alt}
+                  className="h-[500px] md:h-[600px] w-auto rounded-3xl shadow-2xl"
+                />
               </motion.div>
             ))}
-          </motion.div>
+          </div>
+        </motion.div>
+      </section>
 
-          {/* Social proof */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
-            className="mt-16 flex flex-col items-center gap-3"
-          >
-            <div className="flex -space-x-2">
-              {[1, 2, 3, 4, 5].map((i) => (
-                <div
-                  key={i}
-                  className="w-8 h-8 rounded-full bg-gradient-to-br from-lavender-400 to-cyan-400 
-                             border-2 border-obsidian-800 flex items-center justify-center text-xs font-medium text-obsidian"
-                >
-                  {String.fromCharCode(64 + i)}
-                </div>
-              ))}
-            </div>
-            <p className="text-white/40 text-sm">
-              Join thousands making 2025 their best year yet
-            </p>
-          </motion.div>
-        </main>
-
-        {/* Footer */}
-        <footer className="px-6 py-6 text-center safe-bottom safe-x">
-          <p className="text-white/30 text-sm">
-            Free forever • No ads • Your data stays on your device
+      {/* Section 6: Footer */}
+      <footer className="px-6 py-12 border-t border-white/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-white/40 mb-4">
+            © 2025 M.E. Truth
           </p>
-        </footer>
-      </div>
+          <nav className="flex items-center justify-center gap-6 text-sm">
+            <Link to="/privacy" className="text-white/40 hover:text-white transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="text-white/20">|</span>
+            <Link to="/terms" className="text-white/40 hover:text-white transition-colors">
+              Terms of Service
+            </Link>
+            <span className="text-white/20">|</span>
+            <a href="mailto:hello@metruth.com" className="text-white/40 hover:text-white transition-colors">
+              Contact
+            </a>
+          </nav>
+        </div>
+      </footer>
     </div>
   );
 };
