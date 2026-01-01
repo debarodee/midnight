@@ -3,6 +3,7 @@
 // Get these from: Firebase Console > Project Settings > Your apps > Web app
 
 import { initializeApp, getApps, getApp, type FirebaseApp } from 'firebase/app';
+import { getAnalytics, type Analytics } from 'firebase/analytics';
 import { 
   getAuth, 
   GoogleAuthProvider,
@@ -34,8 +35,9 @@ import {
   deleteDoc,
   serverTimestamp,
 } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
-// Firebase configuration - REPLACE WITH YOUR VALUES
+// Firebase configuration
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "YOUR_API_KEY",
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "YOUR_PROJECT.firebaseapp.com",
@@ -43,6 +45,7 @@ const firebaseConfig = {
   storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "YOUR_PROJECT.appspot.com",
   messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "YOUR_SENDER_ID",
   appId: import.meta.env.VITE_FIREBASE_APP_ID || "YOUR_APP_ID",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID, // Optional: for Analytics
 };
 
 // Initialize Firebase
@@ -55,6 +58,17 @@ if (!getApps().length) {
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
+export const storage = getStorage(app);
+
+// Initialize Analytics (only in browser environment)
+export let analytics: Analytics | null = null;
+if (typeof window !== 'undefined' && firebaseConfig.measurementId) {
+  try {
+    analytics = getAnalytics(app);
+  } catch (error) {
+    console.warn('Firebase Analytics initialization failed:', error);
+  }
+}
 
 // Auth providers
 const googleProvider = new GoogleAuthProvider();
