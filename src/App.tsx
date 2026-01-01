@@ -15,6 +15,7 @@ import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 import FAQ from './pages/FAQ';
 import Layout from './components/Layout';
+import ScrollToTop from './components/common/ScrollToTop';
 import { onAuthChange, createUserDocument, handleRedirectResult } from './lib/firebase';
 
 function App() {
@@ -86,6 +87,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {/* Public routes */}
         <Route 
