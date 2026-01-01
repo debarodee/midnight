@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Target, CheckCircle2, Clock, Flame, TrendingUp } from 'lucide-react';
+import { Target, CheckCircle2, Clock, Flame } from 'lucide-react';
 import type { DashboardStats } from '../../types';
 
 interface QuickStatsProps {
@@ -15,8 +15,8 @@ const QuickStats = ({ stats }: QuickStatsProps) => {
         : '0%',
       subtext: `${stats.goalsCompleted} of ${stats.goalsTotal}`,
       icon: Target,
-      color: 'text-violet',
-      bg: 'bg-violet-50',
+      color: 'text-lavender',
+      bg: 'bg-lavender-50 dark:bg-lavender/20',
     },
     {
       label: 'Today\'s Tasks',
@@ -24,7 +24,7 @@ const QuickStats = ({ stats }: QuickStatsProps) => {
       subtext: `${stats.tasksDueToday} remaining`,
       icon: CheckCircle2,
       color: 'text-sage',
-      bg: 'bg-sage-50',
+      bg: 'bg-sage-50 dark:bg-sage/20',
     },
     {
       label: 'Habit Streak',
@@ -32,15 +32,15 @@ const QuickStats = ({ stats }: QuickStatsProps) => {
       subtext: 'days total',
       icon: Flame,
       color: 'text-orange-500',
-      bg: 'bg-orange-50',
+      bg: 'bg-orange-50 dark:bg-orange-500/20',
     },
     {
       label: 'Days Left',
       value: stats.daysRemaining.toString(),
       subtext: 'in 2025',
       icon: Clock,
-      color: 'text-champagne-600',
-      bg: 'bg-champagne-50',
+      color: 'text-cyan-600 dark:text-cyan',
+      bg: 'bg-cyan-50 dark:bg-cyan/20',
     },
   ];
 
@@ -57,9 +57,9 @@ const QuickStats = ({ stats }: QuickStatsProps) => {
           <div className={`w-10 h-10 rounded-xl ${item.bg} flex items-center justify-center mb-3`}>
             <item.icon className={`w-5 h-5 ${item.color}`} />
           </div>
-          <p className="text-2xl font-bold text-midnight mb-1">{item.value}</p>
-          <p className="text-sm text-midnight-300">{item.label}</p>
-          <p className="text-xs text-midnight-200 mt-1">{item.subtext}</p>
+          <p className="text-2xl font-bold text-obsidian dark:text-white mb-1">{item.value}</p>
+          <p className="text-sm text-obsidian-400 dark:text-obsidian-300">{item.label}</p>
+          <p className="text-xs text-obsidian-300 dark:text-obsidian-400 mt-1">{item.subtext}</p>
         </motion.div>
       ))}
     </div>

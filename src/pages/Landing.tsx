@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import { Sparkles, ArrowRight, Moon, Star, Calendar, Target, Heart, DollarSign, Home, Car } from 'lucide-react';
+import { Sparkles, ArrowRight, Star, Calendar, Target, Heart, DollarSign, Home, Car } from 'lucide-react';
 import { useAuthStore, createDemoUser } from '../stores/authStore';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../components/common/Logo';
 
 const Landing = () => {
   const { setUser } = useAuthStore();
@@ -36,12 +37,12 @@ const Landing = () => {
   };
 
   return (
-    <div className="min-h-screen bg-midnight overflow-hidden">
+    <div className="min-h-screen bg-obsidian-800 overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-champagne/5 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-20 right-10 w-96 h-96 bg-violet/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-champagne/3 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-cyan/5 rounded-full blur-3xl animate-pulse-slow" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-lavender/5 rounded-full blur-3xl animate-pulse-slow" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan/3 rounded-full blur-3xl" />
         
         {/* Stars */}
         {[...Array(20)].map((_, i) => (
@@ -69,10 +70,7 @@ const Landing = () => {
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Header */}
         <header className="px-6 py-4 flex items-center justify-between safe-top safe-x">
-          <div className="flex items-center gap-2">
-            <Moon className="w-8 h-8 text-champagne" />
-            <span className="text-xl font-semibold text-white">Midnight</span>
-          </div>
+          <Logo size="md" variant="light" />
         </header>
 
         {/* Hero */}
@@ -90,7 +88,7 @@ const Landing = () => {
               transition={{ delay: 0.2 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 mb-8"
             >
-              <Star className="w-4 h-4 text-champagne" />
+              <Star className="w-4 h-4 text-cyan" />
               <span className="text-white/80 text-sm">
                 {getYearProgress()}% through 2025 — make it count
               </span>
@@ -102,8 +100,8 @@ const Landing = () => {
               transition={{ delay: 0.3 }}
               className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
             >
-              Your year starts{' '}
-              <span className="gradient-text">now</span>
+              The Science of{' '}
+              <span className="gradient-text">Mindful Evolution</span>
             </motion.h1>
 
             <motion.p
@@ -124,7 +122,7 @@ const Landing = () => {
             >
               <button
                 onClick={handleSignIn}
-                className="btn-gold group w-full sm:w-auto"
+                className="btn-cyan group w-full sm:w-auto"
               >
                 <Sparkles className="w-5 h-5 mr-2" />
                 Sign In
@@ -154,10 +152,10 @@ const Landing = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8 + i * 0.1 }}
                 className="p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 
-                           hover:bg-white/10 hover:border-champagne/30 transition-all duration-300
+                           hover:bg-white/10 hover:border-cyan/30 transition-all duration-300
                            cursor-default group"
               >
-                <feature.icon className="w-6 h-6 text-champagne mb-3 group-hover:scale-110 transition-transform" />
+                <feature.icon className="w-6 h-6 text-cyan mb-3 group-hover:scale-110 transition-transform" />
                 <h3 className="text-white font-medium text-sm mb-1">{feature.title}</h3>
                 <p className="text-white/40 text-xs">{feature.desc}</p>
               </motion.div>
@@ -175,8 +173,8 @@ const Landing = () => {
               {[1, 2, 3, 4, 5].map((i) => (
                 <div
                   key={i}
-                  className="w-8 h-8 rounded-full bg-gradient-to-br from-violet-400 to-champagne-400 
-                             border-2 border-midnight flex items-center justify-center text-xs font-medium text-midnight"
+                  className="w-8 h-8 rounded-full bg-gradient-to-br from-lavender-400 to-cyan-400 
+                             border-2 border-obsidian-800 flex items-center justify-center text-xs font-medium text-obsidian"
                 >
                   {String.fromCharCode(64 + i)}
                 </div>

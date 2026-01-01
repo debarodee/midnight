@@ -24,7 +24,7 @@
   }
   
   body {
-    @apply bg-slate-50 text-midnight;
+    @apply bg-white dark:bg-obsidian-800 text-obsidian dark:text-white;
     min-height: 100vh;
     min-height: -webkit-fill-available;
     /* Prevent overscroll bounce on iOS */
@@ -49,48 +49,55 @@
   }
   
   ::-webkit-scrollbar-thumb {
-    @apply bg-midnight-200 rounded-full;
+    @apply bg-obsidian-200 dark:bg-obsidian-500 rounded-full;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-midnight-300;
+    @apply bg-obsidian-300 dark:bg-obsidian-400;
   }
 }
 
 @layer components {
   .btn-primary {
     @apply inline-flex items-center justify-center px-6 py-3 
-           bg-midnight text-white font-medium rounded-2xl
-           hover:bg-midnight-600 active:bg-midnight-800
+           bg-obsidian dark:bg-obsidian-600 text-white font-medium rounded-xl
+           border border-transparent dark:border-obsidian-400
+           hover:bg-obsidian-600 dark:hover:bg-obsidian-500 
+           active:bg-obsidian-700
            transition-all duration-200 ease-out
            shadow-soft hover:shadow-medium
-           focus:outline-none focus:ring-2 focus:ring-champagne focus:ring-offset-2;
+           focus:outline-none focus:ring-2 focus:ring-cyan focus:ring-offset-2 
+           focus:ring-offset-white dark:focus:ring-offset-obsidian-800;
   }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center px-6 py-3 
-           bg-white text-midnight font-medium rounded-2xl
-           border border-midnight-100
-           hover:bg-slate-50 active:bg-slate-100
+           bg-white dark:bg-obsidian-700 text-obsidian dark:text-white font-medium rounded-xl
+           border border-obsidian-100 dark:border-obsidian-500
+           hover:bg-obsidian-50 dark:hover:bg-obsidian-600 
+           active:bg-obsidian-100 dark:active:bg-obsidian-500
            transition-all duration-200 ease-out
            shadow-soft hover:shadow-medium
-           focus:outline-none focus:ring-2 focus:ring-champagne focus:ring-offset-2;
+           focus:outline-none focus:ring-2 focus:ring-cyan focus:ring-offset-2
+           focus:ring-offset-white dark:focus:ring-offset-obsidian-800;
   }
 
-  .btn-gold {
+  .btn-cyan {
     @apply inline-flex items-center justify-center px-6 py-3 
-           bg-gradient-to-r from-champagne-400 to-champagne-500 text-midnight font-semibold rounded-2xl
-           hover:from-champagne-300 hover:to-champagne-400
+           bg-cyan text-obsidian font-semibold rounded-xl
+           hover:bg-cyan-400
            transition-all duration-200 ease-out
            shadow-glow
-           focus:outline-none focus:ring-2 focus:ring-champagne focus:ring-offset-2;
+           focus:outline-none focus:ring-2 focus:ring-cyan focus:ring-offset-2 
+           focus:ring-offset-white dark:focus:ring-offset-obsidian-800;
   }
 
   .card {
-    @apply bg-white rounded-3xl p-6 shadow-soft
-           border border-slate-100/50
+    @apply bg-white dark:bg-obsidian-700 rounded-2xl p-6 
+           shadow-soft
+           border border-obsidian-100 dark:border-obsidian-500
            transition-all duration-300 ease-out
-           hover:shadow-medium;
+           hover:shadow-medium hover:border-cyan-200 dark:hover:border-cyan-700;
   }
 
   .card-interactive {
@@ -100,9 +107,11 @@
 
   .input-field {
     @apply w-full px-4 py-3 
-           bg-slate-50 border border-slate-200 rounded-2xl
-           text-midnight placeholder-midnight-300
-           focus:outline-none focus:ring-2 focus:ring-champagne focus:border-transparent
+           bg-obsidian-50 dark:bg-obsidian-600 
+           border border-obsidian-200 dark:border-obsidian-400 rounded-xl
+           text-obsidian dark:text-white 
+           placeholder-obsidian-400 dark:placeholder-obsidian-300
+           focus:outline-none focus:ring-2 focus:ring-cyan focus:border-transparent
            transition-all duration-200;
   }
 
@@ -116,24 +125,25 @@
 
   .domain-card {
     @apply card p-5 flex flex-col gap-3
-           hover:border-champagne-200;
+           hover:border-cyan-200 dark:hover:border-cyan-700;
   }
 
   .nav-item {
-    @apply flex items-center gap-3 px-4 py-3 rounded-2xl
-           text-midnight-400 font-medium
-           hover:bg-slate-100 hover:text-midnight
+    @apply flex items-center gap-3 px-4 py-3 rounded-xl
+           text-obsidian-400 dark:text-obsidian-200 font-medium
+           hover:bg-obsidian-50 dark:hover:bg-obsidian-600 
+           hover:text-obsidian dark:hover:text-white
            transition-all duration-200;
   }
 
   .nav-item-active {
-    @apply bg-midnight text-white hover:bg-midnight hover:text-white;
+    @apply bg-cyan text-obsidian hover:bg-cyan hover:text-obsidian;
   }
 
   .floating-action {
     @apply fixed bottom-6 right-6 
            w-14 h-14 rounded-full
-           bg-gradient-to-r from-champagne-400 to-champagne-500
+           bg-cyan
            flex items-center justify-center
            shadow-glow
            hover:scale-110 active:scale-95
@@ -141,11 +151,12 @@
   }
 
   .glass-effect {
-    @apply bg-white/80 backdrop-blur-xl border border-white/20;
+    @apply bg-white/80 dark:bg-obsidian-800/80 backdrop-blur-xl 
+           border border-white/20 dark:border-obsidian-600/20;
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-champagne-400 to-champagne-600 
+    @apply bg-gradient-to-r from-cyan to-lavender 
            bg-clip-text text-transparent;
   }
 }
@@ -170,8 +181,8 @@
 }
 
 @keyframes glow {
-  from { box-shadow: 0 0 20px -10px rgba(212, 175, 55, 0.4); }
-  to { box-shadow: 0 0 40px -10px rgba(212, 175, 55, 0.6); }
+  from { box-shadow: 0 0 20px -10px rgba(0, 245, 255, 0.4); }
+  to { box-shadow: 0 0 40px -10px rgba(0, 245, 255, 0.7); }
 }
 
 /* Safe area padding for mobile - iPhone 16 (393×852pt) optimized */

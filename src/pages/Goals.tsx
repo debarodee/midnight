@@ -16,14 +16,14 @@ import type { Goal, GoalCategory } from '../types';
 import { EXAMPLE_GOALS } from '../constants/exampleContent';
 
 const categoryColors: Record<GoalCategory, { bg: string; text: string }> = {
-  health: { bg: 'bg-red-50', text: 'text-red-600' },
-  finance: { bg: 'bg-green-50', text: 'text-green-600' },
-  career: { bg: 'bg-blue-50', text: 'text-blue-600' },
-  relationships: { bg: 'bg-pink-50', text: 'text-pink-600' },
-  personal: { bg: 'bg-violet-50', text: 'text-violet-600' },
-  learning: { bg: 'bg-yellow-50', text: 'text-yellow-600' },
-  home: { bg: 'bg-orange-50', text: 'text-orange-600' },
-  wellness: { bg: 'bg-teal-50', text: 'text-teal-600' },
+  health: { bg: 'bg-red-50 dark:bg-red-500/20', text: 'text-red-600 dark:text-red-400' },
+  finance: { bg: 'bg-green-50 dark:bg-green-500/20', text: 'text-green-600 dark:text-green-400' },
+  career: { bg: 'bg-blue-50 dark:bg-blue-500/20', text: 'text-blue-600 dark:text-blue-400' },
+  relationships: { bg: 'bg-pink-50 dark:bg-pink-500/20', text: 'text-pink-600 dark:text-pink-400' },
+  personal: { bg: 'bg-lavender-50 dark:bg-lavender/20', text: 'text-lavender-600 dark:text-lavender' },
+  learning: { bg: 'bg-yellow-50 dark:bg-yellow-500/20', text: 'text-yellow-600 dark:text-yellow-400' },
+  home: { bg: 'bg-orange-50 dark:bg-orange-500/20', text: 'text-orange-600 dark:text-orange-400' },
+  wellness: { bg: 'bg-teal-50 dark:bg-teal-500/20', text: 'text-teal-600 dark:text-teal-400' },
 };
 
 const Goals = () => {
@@ -46,8 +46,8 @@ const Goals = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-bold text-midnight mb-1">Goals</h1>
-          <p className="text-midnight-300">
+          <h1 className="text-2xl lg:text-3xl font-bold text-obsidian dark:text-white mb-1">Goals</h1>
+          <p className="text-obsidian-400 dark:text-obsidian-300">
             {activeGoals.length} active • {completedGoals.length} completed
           </p>
         </div>
@@ -68,8 +68,8 @@ const Goals = () => {
             onClick={() => setFilter(f)}
             className={`px-4 py-2 rounded-full text-sm font-medium capitalize whitespace-nowrap transition-all
               ${filter === f 
-                ? 'bg-midnight text-white' 
-                : 'bg-slate-100 text-midnight-400 hover:bg-slate-200'
+                ? 'bg-obsidian dark:bg-cyan text-white dark:text-obsidian' 
+                : 'bg-obsidian-100 dark:bg-obsidian-600 text-obsidian-400 dark:text-obsidian-300 hover:bg-obsidian-200 dark:hover:bg-obsidian-500'
               }`}
           >
             {f}
@@ -86,7 +86,7 @@ const Goals = () => {
             animate={{ opacity: 1, y: 0 }}
             className="space-y-4"
           >
-            <div className="flex items-center gap-2 px-4 py-2 bg-violet/10 rounded-xl text-violet text-sm">
+            <div className="flex items-center gap-2 px-4 py-2 bg-lavender/10 dark:bg-lavender/20 rounded-xl text-lavender text-sm">
               <Sparkles className="w-4 h-4" />
               <span>Here's what your goals could look like:</span>
             </div>
@@ -111,9 +111,9 @@ const Goals = () => {
             animate={{ opacity: 1, y: 0 }}
             className="card text-center py-12"
           >
-            <Target className="w-16 h-16 text-midnight-200 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-midnight mb-2">No {filter} goals</h3>
-            <p className="text-midnight-300 mb-6">
+            <Target className="w-16 h-16 text-obsidian-200 dark:text-obsidian-500 mx-auto mb-4" />
+            <h3 className="text-lg font-medium text-obsidian dark:text-white mb-2">No {filter} goals</h3>
+            <p className="text-obsidian-400 dark:text-obsidian-300 mb-6">
               {filter === 'active' ? 'All your goals are completed!' : 'No completed goals yet.'}
             </p>
             <button onClick={() => setShowAddModal(true)} className="btn-secondary">
@@ -195,7 +195,7 @@ const GoalCard = ({ goal, index, onEdit, onDelete, onToggleComplete, onUpdatePro
           className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 mt-1 transition-colors
             ${goal.isCompleted 
               ? 'bg-sage border-sage text-white' 
-              : 'border-midnight-200 hover:border-sage'
+              : 'border-obsidian-200 dark:border-obsidian-400 hover:border-sage'
             }`}
         >
           {goal.isCompleted && <CheckCircle2 className="w-4 h-4" />}
@@ -206,26 +206,26 @@ const GoalCard = ({ goal, index, onEdit, onDelete, onToggleComplete, onUpdatePro
             <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${colors.bg} ${colors.text} capitalize`}>
               {goal.category}
             </span>
-            {goal.isPinned && <Star className="w-4 h-4 text-champagne fill-champagne" />}
+            {goal.isPinned && <Star className="w-4 h-4 text-cyan fill-cyan" />}
           </div>
 
-          <h3 className={`font-semibold text-midnight mb-2 ${goal.isCompleted ? 'line-through' : ''}`}>
+          <h3 className={`font-semibold text-obsidian dark:text-white mb-2 ${goal.isCompleted ? 'line-through' : ''}`}>
             {goal.title}
           </h3>
 
           {goal.description && (
-            <p className="text-sm text-midnight-300 mb-4">{goal.description}</p>
+            <p className="text-sm text-obsidian-400 dark:text-obsidian-300 mb-4">{goal.description}</p>
           )}
 
           {/* Progress bar */}
           <div className="mb-3">
             <div className="flex items-center justify-between text-sm mb-1">
-              <span className="text-midnight-400">Progress</span>
-              <span className="font-medium text-midnight">{goal.progress}%</span>
+              <span className="text-obsidian-400 dark:text-obsidian-300">Progress</span>
+              <span className="font-medium text-obsidian dark:text-white">{goal.progress}%</span>
             </div>
-            <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-obsidian-100 dark:bg-obsidian-500 rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-violet to-champagne rounded-full"
+                className="h-full bg-gradient-to-r from-cyan to-lavender rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: `${goal.progress}%` }}
                 transition={{ duration: 0.5 }}
@@ -242,8 +242,8 @@ const GoalCard = ({ goal, index, onEdit, onDelete, onToggleComplete, onUpdatePro
                   onClick={() => onUpdateProgress(p)}
                   className={`px-3 py-1 rounded-lg text-xs font-medium transition-colors
                     ${goal.progress >= p 
-                      ? 'bg-violet-100 text-violet' 
-                      : 'bg-slate-100 text-midnight-400 hover:bg-slate-200'
+                      ? 'bg-lavender/20 text-lavender' 
+                      : 'bg-obsidian-100 dark:bg-obsidian-600 text-obsidian-400 dark:text-obsidian-300 hover:bg-obsidian-200 dark:hover:bg-obsidian-500'
                     }`}
                 >
                   {p}%
@@ -257,13 +257,13 @@ const GoalCard = ({ goal, index, onEdit, onDelete, onToggleComplete, onUpdatePro
         <div className="flex items-center gap-1">
           <button
             onClick={onEdit}
-            className="p-2 rounded-lg hover:bg-slate-100 text-midnight-400 hover:text-midnight transition-colors"
+            className="p-2 rounded-lg hover:bg-obsidian-100 dark:hover:bg-obsidian-600 text-obsidian-400 dark:text-obsidian-300 hover:text-obsidian dark:hover:text-white transition-colors"
           >
             <Edit2 className="w-4 h-4" />
           </button>
           <button
             onClick={onDelete}
-            className="p-2 rounded-lg hover:bg-red-50 text-midnight-400 hover:text-red-500 transition-colors"
+            className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-obsidian-400 dark:text-obsidian-300 hover:text-red-500 transition-colors"
           >
             <Trash2 className="w-4 h-4" />
           </button>
@@ -285,31 +285,31 @@ const ExampleGoalCard = ({ goal, index }: { goal: Goal; index: number }) => {
       className="card"
     >
       <div className="flex items-start gap-4">
-        <div className="w-6 h-6 rounded-full border-2 border-midnight-200 flex-shrink-0 mt-1" />
+        <div className="w-6 h-6 rounded-full border-2 border-obsidian-200 dark:border-obsidian-500 flex-shrink-0 mt-1" />
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-2">
             <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${colors.bg} ${colors.text} capitalize`}>
               {goal.category}
             </span>
-            {goal.isPinned && <Star className="w-4 h-4 text-champagne fill-champagne" />}
+            {goal.isPinned && <Star className="w-4 h-4 text-cyan fill-cyan" />}
           </div>
 
-          <h3 className="font-semibold text-midnight mb-2">{goal.title}</h3>
+          <h3 className="font-semibold text-obsidian dark:text-white mb-2">{goal.title}</h3>
 
           {goal.description && (
-            <p className="text-sm text-midnight-300 mb-4">{goal.description}</p>
+            <p className="text-sm text-obsidian-400 dark:text-obsidian-300 mb-4">{goal.description}</p>
           )}
 
           {/* Progress bar */}
           <div className="mb-3">
             <div className="flex items-center justify-between text-sm mb-1">
-              <span className="text-midnight-400">Progress</span>
-              <span className="font-medium text-midnight">{goal.progress}%</span>
+              <span className="text-obsidian-400 dark:text-obsidian-300">Progress</span>
+              <span className="font-medium text-obsidian dark:text-white">{goal.progress}%</span>
             </div>
-            <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div className="w-full h-2 bg-obsidian-100 dark:bg-obsidian-500 rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-violet to-champagne rounded-full"
+                className="h-full bg-gradient-to-r from-cyan to-lavender rounded-full"
                 style={{ width: `${goal.progress}%` }}
               />
             </div>
@@ -322,8 +322,8 @@ const ExampleGoalCard = ({ goal, index }: { goal: Goal; index: number }) => {
                 key={p}
                 className={`px-3 py-1 rounded-lg text-xs font-medium
                   ${goal.progress >= p 
-                    ? 'bg-violet-100 text-violet' 
-                    : 'bg-slate-100 text-midnight-400'
+                    ? 'bg-lavender/20 text-lavender' 
+                    : 'bg-obsidian-100 dark:bg-obsidian-600 text-obsidian-400 dark:text-obsidian-300'
                   }`}
               >
                 {p}%
@@ -334,10 +334,10 @@ const ExampleGoalCard = ({ goal, index }: { goal: Goal; index: number }) => {
 
         {/* Actions placeholder */}
         <div className="flex items-center gap-1">
-          <div className="p-2 rounded-lg text-midnight-200">
+          <div className="p-2 rounded-lg text-obsidian-200 dark:text-obsidian-500">
             <Edit2 className="w-4 h-4" />
           </div>
-          <div className="p-2 rounded-lg text-midnight-200">
+          <div className="p-2 rounded-lg text-obsidian-200 dark:text-obsidian-500">
             <Trash2 className="w-4 h-4" />
           </div>
         </div>
@@ -378,24 +378,24 @@ const GoalModal = ({ isOpen, onClose, goal, onSave }: GoalModalProps) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
-        className="fixed inset-0 bg-midnight/30 backdrop-blur-sm z-50"
+        className="fixed inset-0 bg-obsidian/30 dark:bg-obsidian/50 backdrop-blur-sm z-50"
       />
       <motion.div
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 100 }}
         className="fixed bottom-0 left-0 right-0 lg:bottom-auto lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2
-                   bg-white rounded-t-3xl lg:rounded-3xl shadow-2xl z-50 max-h-[80vh] overflow-y-auto
+                   bg-white dark:bg-obsidian-700 rounded-t-3xl lg:rounded-3xl shadow-2xl z-50 max-h-[80vh] overflow-y-auto
                    lg:w-full lg:max-w-lg"
       >
         <div className="p-6">
-          <h2 className="text-xl font-semibold text-midnight mb-6">
+          <h2 className="text-xl font-semibold text-obsidian dark:text-white mb-6">
             {goal ? 'Edit Goal' : 'New Goal'}
           </h2>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-midnight mb-2">Title</label>
+              <label className="block text-sm font-medium text-obsidian dark:text-white mb-2">Title</label>
               <input
                 type="text"
                 value={title}
@@ -407,7 +407,7 @@ const GoalModal = ({ isOpen, onClose, goal, onSave }: GoalModalProps) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-midnight mb-2">Description (optional)</label>
+              <label className="block text-sm font-medium text-obsidian dark:text-white mb-2">Description (optional)</label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -418,7 +418,7 @@ const GoalModal = ({ isOpen, onClose, goal, onSave }: GoalModalProps) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-midnight mb-2">Category</label>
+              <label className="block text-sm font-medium text-obsidian dark:text-white mb-2">Category</label>
               <div className="grid grid-cols-4 gap-2">
                 {(Object.keys(categoryColors) as GoalCategory[]).map((cat) => (
                   <button
@@ -426,8 +426,8 @@ const GoalModal = ({ isOpen, onClose, goal, onSave }: GoalModalProps) => {
                     onClick={() => setCategory(cat)}
                     className={`p-2 rounded-xl text-xs font-medium capitalize transition-all
                       ${category === cat
-                        ? `${categoryColors[cat].bg} ${categoryColors[cat].text} ring-2 ring-offset-2 ring-current`
-                        : 'bg-slate-100 text-midnight-400 hover:bg-slate-200'
+                        ? `${categoryColors[cat].bg} ${categoryColors[cat].text} ring-2 ring-offset-2 ring-current dark:ring-offset-obsidian-700`
+                        : 'bg-obsidian-100 dark:bg-obsidian-600 text-obsidian-400 dark:text-obsidian-300 hover:bg-obsidian-200 dark:hover:bg-obsidian-500'
                       }`}
                   >
                     {cat}
@@ -438,7 +438,7 @@ const GoalModal = ({ isOpen, onClose, goal, onSave }: GoalModalProps) => {
 
             {goal && (
               <div>
-                <label className="block text-sm font-medium text-midnight mb-2">Progress: {progress}%</label>
+                <label className="block text-sm font-medium text-obsidian dark:text-white mb-2">Progress: {progress}%</label>
                 <input
                   type="range"
                   min="0"

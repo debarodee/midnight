@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Moon, ArrowLeft, Loader2, Phone, RefreshCw } from 'lucide-react';
+import { ArrowLeft, Loader2, Phone, RefreshCw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { 
@@ -9,6 +9,7 @@ import {
   clearRecaptcha,
 } from '../../lib/firebase';
 import type { ConfirmationResult } from 'firebase/auth';
+import Logo from '../../components/common/Logo';
 
 type Step = 'phone' | 'code';
 
@@ -191,12 +192,12 @@ const PhoneAuth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-obsidian-800 flex flex-col">
       {/* Header */}
       <header className="px-6 py-4 safe-top safe-x">
         <button
           onClick={handleBack}
-          className="flex items-center gap-2 text-midnight-400 hover:text-midnight transition-colors"
+          className="flex items-center gap-2 text-obsidian-400 dark:text-obsidian-300 hover:text-obsidian dark:hover:text-white transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
           <span className="font-medium">Back</span>
@@ -214,13 +215,11 @@ const PhoneAuth = () => {
         >
           {/* Logo */}
           <div className="flex flex-col items-center mb-10">
-            <div className="w-14 h-14 rounded-full bg-midnight flex items-center justify-center mb-4">
-              <Moon className="w-7 h-7 text-champagne" />
-            </div>
-            <h1 className="text-xl font-bold text-midnight">
+            <Logo size="lg" className="mb-4" />
+            <h1 className="text-xl font-bold text-obsidian dark:text-white">
               {step === 'phone' ? 'Enter your phone number' : 'Enter verification code'}
             </h1>
-            <p className="text-midnight-400 mt-2 text-center">
+            <p className="text-obsidian-400 dark:text-obsidian-300 mt-2 text-center">
               {step === 'phone' 
                 ? "We'll send you a code to verify your number"
                 : `Code sent to ${phoneNumber}`
@@ -232,21 +231,25 @@ const PhoneAuth = () => {
             /* Step 1: Phone Number Input */
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-midnight-600 mb-2">
+                <label className="block text-sm font-medium text-obsidian-600 dark:text-obsidian-200 mb-2">
                   Phone Number
                 </label>
                 <div className="relative">
-                  <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 text-midnight-400">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 text-obsidian-400 dark:text-obsidian-300">
                     <Phone className="w-5 h-5" />
-                    <span className="text-midnight-600 font-medium">+1</span>
+                    <span className="text-obsidian-600 dark:text-obsidian-200 font-medium">+1</span>
                   </div>
                   <input
                     type="tel"
                     value={phoneNumber}
                     onChange={handlePhoneChange}
                     placeholder="(555) 555-5555"
-                    className="w-full pl-20 pr-4 py-4 rounded-2xl border border-slate-200 
-                             focus:border-champagne focus:ring-2 focus:ring-champagne/20 
+                    className="w-full pl-20 pr-4 py-4 rounded-2xl 
+                             bg-white dark:bg-obsidian-700
+                             border border-obsidian-200 dark:border-obsidian-500
+                             text-obsidian dark:text-white
+                             placeholder-obsidian-400 dark:placeholder-obsidian-400
+                             focus:border-cyan focus:ring-2 focus:ring-cyan/20 
                              outline-none transition-all text-lg"
                     autoFocus
                   />
@@ -257,8 +260,8 @@ const PhoneAuth = () => {
                 id="send-code-button"
                 onClick={handleSendCode}
                 disabled={isLoading || phoneNumber.replace(/\D/g, '').length !== 10}
-                className="w-full py-4 rounded-full bg-midnight text-white font-medium
-                         hover:bg-midnight-600 transition-colors
+                className="w-full py-4 rounded-full bg-obsidian dark:bg-obsidian-600 text-white font-medium
+                         hover:bg-obsidian-600 dark:hover:bg-obsidian-500 transition-colors
                          disabled:opacity-50 disabled:cursor-not-allowed
                          flex items-center justify-center gap-2"
               >
@@ -276,7 +279,7 @@ const PhoneAuth = () => {
             /* Step 2: Verification Code Input */
             <div className="space-y-6">
               <div>
-                <label className="block text-sm font-medium text-midnight-600 mb-4 text-center">
+                <label className="block text-sm font-medium text-obsidian-600 dark:text-obsidian-200 mb-4 text-center">
                   6-digit code
                 </label>
                 <div className="flex gap-2 justify-center">
@@ -296,8 +299,11 @@ const PhoneAuth = () => {
                         handleCodeChange(0, pastedData);
                       }}
                       className="w-12 h-14 text-center text-2xl font-bold rounded-xl 
-                               border border-slate-200 focus:border-champagne 
-                               focus:ring-2 focus:ring-champagne/20 outline-none transition-all"
+                               bg-white dark:bg-obsidian-700
+                               border border-obsidian-200 dark:border-obsidian-500
+                               text-obsidian dark:text-white
+                               focus:border-cyan focus:ring-2 focus:ring-cyan/20 
+                               outline-none transition-all"
                       autoFocus={index === 0}
                     />
                   ))}
@@ -307,8 +313,8 @@ const PhoneAuth = () => {
               <button
                 onClick={handleVerifyCode}
                 disabled={isLoading || verificationCode.length !== 6}
-                className="w-full py-4 rounded-full bg-midnight text-white font-medium
-                         hover:bg-midnight-600 transition-colors
+                className="w-full py-4 rounded-full bg-obsidian dark:bg-obsidian-600 text-white font-medium
+                         hover:bg-obsidian-600 dark:hover:bg-obsidian-500 transition-colors
                          disabled:opacity-50 disabled:cursor-not-allowed
                          flex items-center justify-center gap-2"
               >
@@ -326,8 +332,8 @@ const PhoneAuth = () => {
                 <button
                   onClick={handleResendCode}
                   disabled={resendCooldown > 0}
-                  className="text-sky-500 hover:text-sky-600 font-medium inline-flex items-center gap-2
-                           disabled:text-midnight-300 disabled:cursor-not-allowed"
+                  className="text-cyan-600 dark:text-cyan hover:text-cyan-700 dark:hover:text-cyan-400 font-medium inline-flex items-center gap-2
+                           disabled:text-obsidian-300 dark:disabled:text-obsidian-400 disabled:cursor-not-allowed"
                 >
                   <RefreshCw className={`w-4 h-4 ${resendCooldown > 0 ? '' : 'hover:rotate-180 transition-transform'}`} />
                   {resendCooldown > 0 ? `Resend code in ${resendCooldown}s` : 'Resend code'}
@@ -341,9 +347,9 @@ const PhoneAuth = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="mt-6 p-4 rounded-2xl bg-red-50 border border-red-100"
+              className="mt-6 p-4 rounded-2xl bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800"
             >
-              <p className="text-red-600 text-sm text-center">{error}</p>
+              <p className="text-red-600 dark:text-red-400 text-sm text-center">{error}</p>
             </motion.div>
           )}
         </motion.div>

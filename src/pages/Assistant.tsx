@@ -89,21 +89,21 @@ const Assistant = () => {
   return (
     <div className="h-[calc(100vh-5rem)] lg:h-screen flex flex-col">
       {/* Header */}
-      <div className="p-4 lg:p-6 border-b border-slate-100 bg-white">
+      <div className="p-4 lg:p-6 border-b border-obsidian-100 dark:border-obsidian-600 bg-white dark:bg-obsidian-700">
         <div className="max-w-3xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet to-champagne flex items-center justify-center">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-lavender to-cyan flex items-center justify-center">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="font-semibold text-midnight">Midnight Assistant</h1>
-              <p className="text-sm text-midnight-300">AI-powered life coaching</p>
+              <h1 className="font-semibold text-obsidian dark:text-white">M.E. Assistant</h1>
+              <p className="text-sm text-obsidian-400 dark:text-obsidian-300">AI-powered life coaching</p>
             </div>
           </div>
           {chatHistory.length > 0 && (
             <button
               onClick={clearChatHistory}
-              className="p-2 rounded-lg hover:bg-slate-100 text-midnight-400 hover:text-red-500 transition-colors"
+              className="p-2 rounded-lg hover:bg-obsidian-100 dark:hover:bg-obsidian-600 text-obsidian-400 dark:text-obsidian-300 hover:text-red-500 transition-colors"
               title="Clear chat"
             >
               <Trash2 className="w-5 h-5" />
@@ -113,7 +113,7 @@ const Assistant = () => {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 lg:p-6">
+      <div className="flex-1 overflow-y-auto p-4 lg:p-6 bg-obsidian-50 dark:bg-obsidian-800">
         <div className="max-w-3xl mx-auto space-y-6">
           {chatHistory.length === 0 ? (
             <motion.div
@@ -123,18 +123,18 @@ const Assistant = () => {
             >
               {/* Header */}
               <div className="text-center">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-violet/10 to-champagne/10 flex items-center justify-center mx-auto mb-6">
-                  <MessageCircle className="w-10 h-10 text-violet" />
+                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-lavender/10 to-cyan/10 dark:from-lavender/20 dark:to-cyan/20 flex items-center justify-center mx-auto mb-6">
+                  <MessageCircle className="w-10 h-10 text-lavender" />
                 </div>
-                <h2 className="text-xl font-semibold text-midnight mb-2">How can I help you today?</h2>
-                <p className="text-midnight-300 max-w-md mx-auto">
+                <h2 className="text-xl font-semibold text-obsidian dark:text-white mb-2">How can I help you today?</h2>
+                <p className="text-obsidian-400 dark:text-obsidian-300 max-w-md mx-auto">
                   I'm your personal life assistant. Ask me anything about productivity, adulting tips, or managing your goals.
                 </p>
               </div>
 
               {/* Example conversation preview */}
               <div className="space-y-3">
-                <div className="flex items-center gap-2 px-4 py-2 bg-violet/10 rounded-xl text-violet text-sm w-fit mx-auto">
+                <div className="flex items-center gap-2 px-4 py-2 bg-lavender/10 dark:bg-lavender/20 rounded-xl text-lavender text-sm w-fit mx-auto">
                   <Sparkles className="w-4 h-4" />
                   <span>Here's an example conversation:</span>
                 </div>
@@ -147,8 +147,8 @@ const Assistant = () => {
                     >
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 
                         ${message.role === 'user' 
-                          ? 'bg-midnight text-white' 
-                          : 'bg-gradient-to-br from-violet to-champagne'
+                          ? 'bg-obsidian dark:bg-obsidian-600 text-white' 
+                          : 'bg-gradient-to-br from-lavender to-cyan'
                         }`}
                       >
                         {message.role === 'user' ? (
@@ -160,8 +160,8 @@ const Assistant = () => {
                       <div
                         className={`max-w-[80%] rounded-2xl px-4 py-3 
                           ${message.role === 'user' 
-                            ? 'bg-midnight text-white rounded-tr-none' 
-                            : 'bg-slate-100 text-midnight rounded-tl-none'
+                            ? 'bg-obsidian dark:bg-obsidian-600 text-white rounded-tr-none' 
+                            : 'bg-white dark:bg-obsidian-700 text-obsidian dark:text-white rounded-tl-none'
                           }`}
                       >
                         <p className="whitespace-pre-wrap text-sm">{message.content}</p>
@@ -173,13 +173,13 @@ const Assistant = () => {
 
               {/* Suggested questions */}
               <div className="space-y-3 text-center">
-                <p className="text-sm text-midnight-400">Try asking:</p>
+                <p className="text-sm text-obsidian-400 dark:text-obsidian-300">Try asking:</p>
                 <div className="flex flex-wrap justify-center gap-2">
                   {suggestedQuestions.map((question) => (
                     <button
                       key={question}
                       onClick={() => handleSend(question)}
-                      className="px-4 py-2 rounded-full bg-slate-100 text-sm text-midnight hover:bg-slate-200 transition-colors"
+                      className="px-4 py-2 rounded-full bg-white dark:bg-obsidian-700 text-sm text-obsidian dark:text-white hover:bg-obsidian-100 dark:hover:bg-obsidian-600 transition-colors"
                     >
                       {question}
                     </button>
@@ -199,14 +199,14 @@ const Assistant = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className="flex gap-3"
                 >
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-violet to-champagne flex items-center justify-center flex-shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-lavender to-cyan flex items-center justify-center flex-shrink-0">
                     <Sparkles className="w-4 h-4 text-white" />
                   </div>
-                  <div className="bg-slate-100 rounded-2xl rounded-tl-none px-4 py-3">
+                  <div className="bg-white dark:bg-obsidian-700 rounded-2xl rounded-tl-none px-4 py-3">
                     <div className="flex gap-1">
-                      <span className="w-2 h-2 bg-midnight-300 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                      <span className="w-2 h-2 bg-midnight-300 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                      <span className="w-2 h-2 bg-midnight-300 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                      <span className="w-2 h-2 bg-obsidian-300 dark:bg-obsidian-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                      <span className="w-2 h-2 bg-obsidian-300 dark:bg-obsidian-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                      <span className="w-2 h-2 bg-obsidian-300 dark:bg-obsidian-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                     </div>
                   </div>
                 </motion.div>
@@ -219,7 +219,7 @@ const Assistant = () => {
       </div>
 
       {/* Input */}
-      <div className="p-4 lg:p-6 border-t border-slate-100 bg-white safe-bottom">
+      <div className="p-4 lg:p-6 border-t border-obsidian-100 dark:border-obsidian-600 bg-white dark:bg-obsidian-700 safe-bottom">
         <div className="max-w-3xl mx-auto">
           <div className="relative">
             <textarea
@@ -236,19 +236,19 @@ const Assistant = () => {
             <button
               onClick={() => handleSend()}
               disabled={!input.trim() || isLoading}
-              className="absolute right-2 bottom-2 w-10 h-10 rounded-xl bg-midnight hover:bg-midnight-600 
-                         disabled:bg-slate-200 disabled:text-slate-400
+              className="absolute right-2 bottom-2 w-10 h-10 rounded-xl bg-obsidian dark:bg-cyan hover:bg-obsidian-600 dark:hover:bg-cyan-400
+                         disabled:bg-obsidian-200 dark:disabled:bg-obsidian-500 disabled:text-obsidian-400
                          flex items-center justify-center transition-colors"
             >
               {isLoading ? (
-                <RefreshCw className="w-5 h-5 text-white animate-spin" />
+                <RefreshCw className="w-5 h-5 text-white dark:text-obsidian animate-spin" />
               ) : (
-                <Send className="w-5 h-5 text-white" />
+                <Send className="w-5 h-5 text-white dark:text-obsidian" />
               )}
             </button>
           </div>
-          <p className="text-xs text-midnight-300 mt-2 text-center">
-            Midnight uses AI to provide suggestions. Always verify important information.
+          <p className="text-xs text-obsidian-400 dark:text-obsidian-300 mt-2 text-center">
+            M.E. uses AI to provide suggestions. Always verify important information.
           </p>
         </div>
       </div>
@@ -268,8 +268,8 @@ const ChatBubble = ({ message }: { message: ChatMessage }) => {
     >
       <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 
         ${isUser 
-          ? 'bg-midnight text-white' 
-          : 'bg-gradient-to-br from-violet to-champagne'
+          ? 'bg-obsidian dark:bg-obsidian-600 text-white' 
+          : 'bg-gradient-to-br from-lavender to-cyan'
         }`}
       >
         {isUser ? (
@@ -281,8 +281,8 @@ const ChatBubble = ({ message }: { message: ChatMessage }) => {
       <div
         className={`max-w-[80%] rounded-2xl px-4 py-3 
           ${isUser 
-            ? 'bg-midnight text-white rounded-tr-none' 
-            : 'bg-slate-100 text-midnight rounded-tl-none'
+            ? 'bg-obsidian dark:bg-obsidian-600 text-white rounded-tr-none' 
+            : 'bg-white dark:bg-obsidian-700 text-obsidian dark:text-white rounded-tl-none'
           }`}
       >
         <p className="whitespace-pre-wrap">{message.content}</p>

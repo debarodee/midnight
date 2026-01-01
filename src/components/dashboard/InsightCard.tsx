@@ -54,20 +54,20 @@ const InsightCard = ({ stats }: InsightCardProps) => {
   };
 
   return (
-    <div className="card h-full bg-gradient-to-br from-violet-50 to-champagne-50 border-violet-100">
+    <div className="card h-full bg-gradient-to-br from-lavender-50 to-cyan-50 dark:from-lavender/10 dark:to-cyan/10 border-lavender-100 dark:border-lavender/20">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-violet/10 flex items-center justify-center">
-            <Sparkles className="w-4 h-4 text-violet" />
+          <div className="w-8 h-8 rounded-lg bg-lavender/10 dark:bg-lavender/20 flex items-center justify-center">
+            <Sparkles className="w-4 h-4 text-lavender" />
           </div>
-          <h3 className="font-semibold text-midnight">Daily Insight</h3>
+          <h3 className="font-semibold text-obsidian dark:text-white">Daily Insight</h3>
         </div>
         <button
           onClick={generateInsight}
           disabled={isLoading}
-          className="p-2 rounded-lg hover:bg-white/50 transition-colors"
+          className="p-2 rounded-lg hover:bg-white/50 dark:hover:bg-obsidian-600/50 transition-colors"
         >
-          <RefreshCw className={`w-4 h-4 text-midnight-400 ${isLoading ? 'animate-spin' : ''}`} />
+          <RefreshCw className={`w-4 h-4 text-obsidian-400 dark:text-obsidian-300 ${isLoading ? 'animate-spin' : ''}`} />
         </button>
       </div>
 
@@ -75,17 +75,17 @@ const InsightCard = ({ stats }: InsightCardProps) => {
         key={insight}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-midnight-600 leading-relaxed mb-6"
+        className="text-obsidian-600 dark:text-obsidian-200 leading-relaxed mb-6"
       >
         {insight || 'Loading your personalized insight...'}
       </motion.p>
 
       <Link
         to="/app/assistant"
-        className="inline-flex items-center gap-2 text-sm font-medium text-violet hover:text-violet-600 transition-colors"
+        className="inline-flex items-center gap-2 text-sm font-medium text-lavender hover:text-lavender-600 dark:hover:text-lavender-400 transition-colors"
       >
         <MessageCircle className="w-4 h-4" />
-        Ask Midnight for advice
+        Ask M.E. for advice
       </Link>
     </div>
   );

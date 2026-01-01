@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
-import { Moon, Loader2, ArrowLeft } from 'lucide-react';
+import { Loader2, ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { signInWithGoogle, signInWithApple } from '../lib/firebase';
+import Logo from '../components/common/Logo';
 
 // SVG Icons for auth providers
 const GoogleIcon = () => (
@@ -121,12 +122,12 @@ const Login = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-obsidian-800 flex flex-col">
       {/* Header with back button */}
       <header className="px-6 py-4 safe-top safe-x">
         <button
           onClick={() => navigate('/')}
-          className="flex items-center gap-2 text-midnight-400 hover:text-midnight transition-colors"
+          className="flex items-center gap-2 text-obsidian-400 dark:text-obsidian-300 hover:text-obsidian dark:hover:text-white transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
           <span className="font-medium">Back</span>
@@ -143,11 +144,9 @@ const Login = () => {
         >
           {/* Logo */}
           <div className="flex flex-col items-center mb-12">
-            <div className="w-16 h-16 rounded-full bg-midnight flex items-center justify-center mb-4">
-              <Moon className="w-8 h-8 text-champagne" />
-            </div>
-            <h1 className="text-2xl font-bold text-midnight">Midnight</h1>
-            <p className="text-midnight-400 mt-2">Sign in to continue</p>
+            <Logo size="lg" className="mb-4" />
+            <h1 className="text-2xl font-bold text-obsidian dark:text-white">Momentous Year</h1>
+            <p className="text-obsidian-400 dark:text-obsidian-300 mt-2">Sign in to continue</p>
           </div>
 
           {/* Auth buttons */}
@@ -165,8 +164,8 @@ const Login = () => {
                   rounded-full font-medium transition-all duration-200
                   disabled:opacity-50 disabled:cursor-not-allowed
                   ${button.primary
-                    ? 'bg-white text-midnight border-2 border-midnight hover:bg-midnight hover:text-white'
-                    : 'bg-white text-midnight border border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                    ? 'bg-white dark:bg-obsidian-700 text-obsidian dark:text-white border-2 border-obsidian dark:border-obsidian-500 hover:bg-obsidian hover:text-white dark:hover:bg-obsidian-600'
+                    : 'bg-white dark:bg-obsidian-700 text-obsidian dark:text-white border border-obsidian-200 dark:border-obsidian-500 hover:border-obsidian-300 dark:hover:border-obsidian-400 hover:bg-obsidian-50 dark:hover:bg-obsidian-600'
                   }
                 `}
               >
@@ -187,9 +186,9 @@ const Login = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="mt-6 p-4 rounded-2xl bg-red-50 border border-red-100"
+              className="mt-6 p-4 rounded-2xl bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800"
             >
-              <p className="text-red-600 text-sm text-center">{error}</p>
+              <p className="text-red-600 dark:text-red-400 text-sm text-center">{error}</p>
             </motion.div>
           )}
         </motion.div>
@@ -197,13 +196,13 @@ const Login = () => {
 
       {/* Footer with terms */}
       <footer className="px-6 py-8 safe-bottom safe-x">
-        <p className="text-center text-sm text-midnight-400">
+        <p className="text-center text-sm text-obsidian-400 dark:text-obsidian-300">
           By continuing, I acknowledge that I have read and agree to the{' '}
-          <a href="/terms" className="text-sky-500 hover:underline">
+          <a href="/terms" className="text-cyan-600 dark:text-cyan hover:underline">
             Terms of Service
           </a>{' '}
           and{' '}
-          <a href="/privacy" className="text-sky-500 hover:underline">
+          <a href="/privacy" className="text-cyan-600 dark:text-cyan hover:underline">
             Privacy Policy
           </a>
         </p>

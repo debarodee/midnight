@@ -65,21 +65,21 @@ const Journal = () => {
   return (
     <div className="min-h-screen pb-24 lg:pb-8">
       {/* Header */}
-      <div className="bg-white border-b border-slate-100 sticky top-0 z-10">
+      <div className="bg-white dark:bg-obsidian-700 border-b border-obsidian-100 dark:border-obsidian-600 sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4 lg:px-6 lg:py-6">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet to-champagne flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-lavender to-cyan flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-white" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-midnight">Journal</h1>
-                <p className="text-sm text-midnight-300">{journal.length} entries</p>
+                <h1 className="text-xl font-bold text-obsidian dark:text-white">Journal</h1>
+                <p className="text-sm text-obsidian-400 dark:text-obsidian-300">{journal.length} entries</p>
               </div>
             </div>
             <button
               onClick={() => setShowNewEntry(true)}
-              className="btn-gold flex items-center gap-2"
+              className="btn-cyan flex items-center gap-2"
             >
               <Plus className="w-4 h-4" />
               <span className="hidden sm:inline">New Entry</span>
@@ -88,7 +88,7 @@ const Journal = () => {
 
           {/* Search */}
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-midnight-300" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-obsidian-400 dark:text-obsidian-300" />
             <input
               type="text"
               placeholder="Search entries..."
@@ -109,7 +109,7 @@ const Journal = () => {
             className="space-y-6"
           >
             {/* Header badge */}
-            <div className="flex items-center gap-2 px-4 py-2 bg-violet/10 rounded-xl text-violet text-sm">
+            <div className="flex items-center gap-2 px-4 py-2 bg-lavender/10 dark:bg-lavender/20 rounded-xl text-lavender text-sm">
               <Sparkles className="w-4 h-4" />
               <span>Here's what your journal could look like:</span>
             </div>
@@ -126,19 +126,19 @@ const Journal = () => {
                     className="card p-4"
                   >
                     <div className="flex items-start gap-3">
-                      <div className={`w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center ${mood.color}`}>
+                      <div className={`w-10 h-10 rounded-xl bg-obsidian-100 dark:bg-obsidian-600 flex items-center justify-center ${mood.color}`}>
                         <MoodIcon className="w-5 h-5" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1">
-                          <h3 className="font-medium text-midnight truncate">
+                          <h3 className="font-medium text-obsidian dark:text-white truncate">
                             {entry.title || format(new Date(entry.createdAt), 'EEEE, MMM d')}
                           </h3>
-                          <span className="text-xs text-midnight-300">
+                          <span className="text-xs text-obsidian-400 dark:text-obsidian-300">
                             {format(new Date(entry.createdAt), 'h:mm a')}
                           </span>
                         </div>
-                        <p className="text-sm text-midnight-400 line-clamp-2">
+                        <p className="text-sm text-obsidian-400 dark:text-obsidian-300 line-clamp-2">
                           {entry.content}
                         </p>
                         {entry.tags && entry.tags.length > 0 && (
@@ -146,7 +146,7 @@ const Journal = () => {
                             {entry.tags.slice(0, 3).map((tag: string) => (
                               <span
                                 key={tag}
-                                className="px-2 py-0.5 rounded-full bg-violet/10 text-violet text-xs"
+                                className="px-2 py-0.5 rounded-full bg-lavender/10 dark:bg-lavender/20 text-lavender text-xs"
                               >
                                 {tag}
                               </span>
@@ -164,7 +164,7 @@ const Journal = () => {
             <div className="text-center pt-2">
               <button
                 onClick={() => setShowNewEntry(true)}
-                className="btn-gold"
+                className="btn-cyan"
               >
                 <Plus className="w-4 h-4 mr-2" />
                 Write Your First Entry
@@ -175,7 +175,7 @@ const Journal = () => {
           <div className="space-y-8">
             {Object.entries(groupedEntries).map(([period, entries]) => (
               <div key={period}>
-                <h2 className="text-sm font-medium text-midnight-400 uppercase tracking-wide mb-3">
+                <h2 className="text-sm font-medium text-obsidian-400 dark:text-obsidian-300 uppercase tracking-wide mb-3">
                   {period}
                 </h2>
                 <div className="space-y-3">
@@ -192,19 +192,19 @@ const Journal = () => {
                         onClick={() => setSelectedEntry(entry)}
                       >
                         <div className="flex items-start gap-3">
-                          <div className={`w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center ${mood.color}`}>
+                          <div className={`w-10 h-10 rounded-xl bg-obsidian-100 dark:bg-obsidian-600 flex items-center justify-center ${mood.color}`}>
                             <MoodIcon className="w-5 h-5" />
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center justify-between mb-1">
-                              <h3 className="font-medium text-midnight truncate">
+                              <h3 className="font-medium text-obsidian dark:text-white truncate">
                                 {entry.title || format(new Date(entry.createdAt), 'EEEE, MMM d')}
                               </h3>
-                              <span className="text-xs text-midnight-300">
+                              <span className="text-xs text-obsidian-400 dark:text-obsidian-300">
                                 {format(new Date(entry.createdAt), 'h:mm a')}
                               </span>
                             </div>
-                            <p className="text-sm text-midnight-400 line-clamp-2">
+                            <p className="text-sm text-obsidian-400 dark:text-obsidian-300 line-clamp-2">
                               {entry.content}
                             </p>
                             {entry.tags && entry.tags.length > 0 && (
@@ -212,7 +212,7 @@ const Journal = () => {
                                 {entry.tags.slice(0, 3).map((tag: string) => (
                                   <span
                                     key={tag}
-                                    className="px-2 py-0.5 rounded-full bg-violet/10 text-violet text-xs"
+                                    className="px-2 py-0.5 rounded-full bg-lavender/10 dark:bg-lavender/20 text-lavender text-xs"
                                   >
                                     {tag}
                                   </span>
@@ -333,19 +333,19 @@ const JournalEntryModal = ({
         animate={{ y: 0 }}
         exit={{ y: '100%' }}
         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-        className="bg-white rounded-t-3xl lg:rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden"
+        className="bg-white dark:bg-obsidian-700 rounded-t-3xl lg:rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-slate-100">
-          <h2 className="text-lg font-semibold text-midnight">
+        <div className="flex items-center justify-between p-4 border-b border-obsidian-100 dark:border-obsidian-600">
+          <h2 className="text-lg font-semibold text-obsidian dark:text-white">
             {entry ? 'Edit Entry' : 'New Entry'}
           </h2>
           <button
             onClick={onClose}
-            className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+            className="p-2 rounded-lg hover:bg-obsidian-100 dark:hover:bg-obsidian-600 transition-colors"
           >
-            <X className="w-5 h-5 text-midnight-400" />
+            <X className="w-5 h-5 text-obsidian-400 dark:text-obsidian-300" />
           </button>
         </div>
 
@@ -353,7 +353,7 @@ const JournalEntryModal = ({
         <div className="p-4 space-y-4 overflow-y-auto max-h-[calc(90vh-140px)]">
           {/* Mood Selector */}
           <div>
-            <label className="block text-sm font-medium text-midnight-400 mb-2">
+            <label className="block text-sm font-medium text-obsidian-400 dark:text-obsidian-300 mb-2">
               How are you feeling?
             </label>
             <div className="flex gap-2">
@@ -365,12 +365,12 @@ const JournalEntryModal = ({
                       onClick={() => setMood(option.value as 'great' | 'good' | 'okay' | 'low' | 'bad')}
                       className={`flex-1 p-3 rounded-xl border-2 transition-all ${
                         mood === option.value
-                          ? 'border-violet bg-violet/5'
-                          : 'border-slate-200 hover:border-slate-300'
+                          ? 'border-lavender bg-lavender/5 dark:bg-lavender/10'
+                          : 'border-obsidian-200 dark:border-obsidian-500 hover:border-obsidian-300 dark:hover:border-obsidian-400'
                       }`}
                     >
                       <Icon className={`w-6 h-6 mx-auto ${option.color}`} />
-                      <span className="text-xs text-midnight-400 mt-1 block">{option.label}</span>
+                      <span className="text-xs text-obsidian-400 dark:text-obsidian-300 mt-1 block">{option.label}</span>
                     </button>
                 );
               })}
@@ -379,7 +379,7 @@ const JournalEntryModal = ({
 
           {/* Title */}
           <div>
-            <label className="block text-sm font-medium text-midnight-400 mb-2">
+            <label className="block text-sm font-medium text-obsidian-400 dark:text-obsidian-300 mb-2">
               Title (optional)
             </label>
             <input
@@ -393,7 +393,7 @@ const JournalEntryModal = ({
 
           {/* Content */}
           <div>
-            <label className="block text-sm font-medium text-midnight-400 mb-2">
+            <label className="block text-sm font-medium text-obsidian-400 dark:text-obsidian-300 mb-2">
               What's on your mind?
             </label>
             <textarea
@@ -407,7 +407,7 @@ const JournalEntryModal = ({
 
           {/* Tags */}
           <div>
-            <label className="block text-sm font-medium text-midnight-400 mb-2">
+            <label className="block text-sm font-medium text-obsidian-400 dark:text-obsidian-300 mb-2">
               Tags
             </label>
             <div className="flex gap-2 mb-2">
@@ -421,7 +421,7 @@ const JournalEntryModal = ({
               />
               <button
                 onClick={handleAddTag}
-                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors"
+                className="px-4 py-2 rounded-xl bg-obsidian-100 dark:bg-obsidian-600 hover:bg-obsidian-200 dark:hover:bg-obsidian-500 transition-colors text-obsidian dark:text-white"
               >
                 Add
               </button>
@@ -431,7 +431,7 @@ const JournalEntryModal = ({
                 {tags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 rounded-full bg-violet/10 text-violet text-sm flex items-center gap-1"
+                    className="px-3 py-1 rounded-full bg-lavender/10 dark:bg-lavender/20 text-lavender text-sm flex items-center gap-1"
                   >
                     {tag}
                     <button
@@ -448,7 +448,7 @@ const JournalEntryModal = ({
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-slate-100 safe-bottom">
+        <div className="p-4 border-t border-obsidian-100 dark:border-obsidian-600 safe-bottom">
           <button
             onClick={handleSubmit}
             disabled={!content.trim()}
@@ -491,20 +491,20 @@ const ViewEntryModal = ({
         animate={{ y: 0 }}
         exit={{ y: '100%' }}
         transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-        className="bg-white rounded-t-3xl lg:rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden"
+        className="bg-white dark:bg-obsidian-700 rounded-t-3xl lg:rounded-3xl w-full max-w-2xl max-h-[90vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-slate-100">
+        <div className="flex items-center justify-between p-4 border-b border-obsidian-100 dark:border-obsidian-600">
           <div className="flex items-center gap-3">
-            <div className={`w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center ${mood.color}`}>
+            <div className={`w-10 h-10 rounded-xl bg-obsidian-100 dark:bg-obsidian-600 flex items-center justify-center ${mood.color}`}>
               <MoodIcon className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="font-semibold text-midnight">
+              <h2 className="font-semibold text-obsidian dark:text-white">
                 {entry.title || format(new Date(entry.createdAt), 'EEEE, MMMM d')}
               </h2>
-              <p className="text-sm text-midnight-300">
+              <p className="text-sm text-obsidian-400 dark:text-obsidian-300">
                 {format(new Date(entry.createdAt), 'h:mm a')} · {mood.label}
               </p>
             </div>
@@ -512,37 +512,37 @@ const ViewEntryModal = ({
           <div className="flex items-center gap-2">
             <button
               onClick={onEdit}
-              className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              className="p-2 rounded-lg hover:bg-obsidian-100 dark:hover:bg-obsidian-600 transition-colors"
             >
-              <Edit3 className="w-5 h-5 text-midnight-400" />
+              <Edit3 className="w-5 h-5 text-obsidian-400 dark:text-obsidian-300" />
             </button>
             <button
               onClick={() => setShowDeleteConfirm(true)}
-              className="p-2 rounded-lg hover:bg-red-50 transition-colors"
+              className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
             >
               <Trash2 className="w-5 h-5 text-red-500" />
             </button>
             <button
               onClick={onClose}
-              className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              className="p-2 rounded-lg hover:bg-obsidian-100 dark:hover:bg-obsidian-600 transition-colors"
             >
-              <X className="w-5 h-5 text-midnight-400" />
+              <X className="w-5 h-5 text-obsidian-400 dark:text-obsidian-300" />
             </button>
           </div>
         </div>
 
         {/* Content */}
         <div className="p-4 overflow-y-auto max-h-[calc(90vh-80px)]">
-          <p className="text-midnight whitespace-pre-wrap leading-relaxed">
+          <p className="text-obsidian dark:text-white whitespace-pre-wrap leading-relaxed">
             {entry.content}
           </p>
           
           {entry.tags && entry.tags.length > 0 && (
-            <div className="flex flex-wrap gap-2 mt-6 pt-4 border-t border-slate-100">
+            <div className="flex flex-wrap gap-2 mt-6 pt-4 border-t border-obsidian-100 dark:border-obsidian-600">
               {entry.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1 rounded-full bg-violet/10 text-violet text-sm"
+                  className="px-3 py-1 rounded-full bg-lavender/10 dark:bg-lavender/20 text-lavender text-sm"
                 >
                   {tag}
                 </span>
@@ -558,17 +558,17 @@ const ViewEntryModal = ({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-white flex flex-col items-center justify-center p-6"
+              className="absolute inset-0 bg-white dark:bg-obsidian-700 flex flex-col items-center justify-center p-6"
             >
               <Trash2 className="w-12 h-12 text-red-500 mb-4" />
-              <h3 className="text-lg font-semibold text-midnight mb-2">Delete Entry?</h3>
-              <p className="text-midnight-400 text-center mb-6">
+              <h3 className="text-lg font-semibold text-obsidian dark:text-white mb-2">Delete Entry?</h3>
+              <p className="text-obsidian-400 dark:text-obsidian-300 text-center mb-6">
                 This action cannot be undone.
               </p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowDeleteConfirm(false)}
-                  className="px-6 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 transition-colors"
+                  className="px-6 py-2 rounded-xl bg-obsidian-100 dark:bg-obsidian-600 hover:bg-obsidian-200 dark:hover:bg-obsidian-500 transition-colors text-obsidian dark:text-white"
                 >
                   Cancel
                 </button>

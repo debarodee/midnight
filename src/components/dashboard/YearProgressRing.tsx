@@ -46,8 +46,8 @@ const YearProgressRing = ({
         />
         <defs>
           <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#D4AF37" />
-            <stop offset="100%" stopColor="#8B5CF6" />
+            <stop offset="0%" stopColor="#00F5FF" />
+            <stop offset="100%" stopColor="#8A2BE2" />
           </linearGradient>
         </defs>
       </svg>
@@ -69,7 +69,7 @@ const YearProgressRing = ({
       <div 
         className="absolute inset-0 rounded-full opacity-30 blur-xl"
         style={{
-          background: `conic-gradient(from 270deg, #D4AF37 ${progress}%, transparent ${progress}%)`,
+          background: `conic-gradient(from 270deg, #00F5FF ${progress}%, transparent ${progress}%)`,
         }}
       />
     </div>

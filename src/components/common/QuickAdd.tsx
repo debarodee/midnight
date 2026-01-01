@@ -111,7 +111,7 @@ const QuickAdd = ({ isOpen, onClose }: QuickAddProps) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-midnight/30 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-obsidian/30 dark:bg-obsidian/50 backdrop-blur-sm z-50"
           />
 
           {/* Modal */}
@@ -121,17 +121,17 @@ const QuickAdd = ({ isOpen, onClose }: QuickAddProps) => {
             exit={{ opacity: 0, y: 100, scale: 0.95 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
             className="fixed bottom-0 left-0 right-0 lg:bottom-auto lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2 
-                       bg-white rounded-t-3xl lg:rounded-3xl shadow-2xl z-50 
+                       bg-white dark:bg-obsidian-700 rounded-t-3xl lg:rounded-3xl shadow-2xl z-50 
                        max-h-[80vh] lg:max-h-none lg:w-full lg:max-w-lg overflow-hidden"
           >
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-slate-100">
-              <h2 className="font-semibold text-midnight">Add New</h2>
+            <div className="flex items-center justify-between p-4 border-b border-obsidian-100 dark:border-obsidian-600">
+              <h2 className="font-semibold text-obsidian dark:text-white">Add New</h2>
               <button
                 onClick={onClose}
-                className="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center transition-colors"
+                className="w-8 h-8 rounded-lg hover:bg-obsidian-100 dark:hover:bg-obsidian-600 flex items-center justify-center transition-colors"
               >
-                <X className="w-5 h-5 text-midnight-400" />
+                <X className="w-5 h-5 text-obsidian-400 dark:text-obsidian-300" />
               </button>
             </div>
 
@@ -143,8 +143,8 @@ const QuickAdd = ({ isOpen, onClose }: QuickAddProps) => {
                   onClick={() => setActiveType(type.id)}
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all
                     ${activeType === type.id 
-                      ? 'bg-midnight text-white' 
-                      : 'bg-slate-100 text-midnight-400 hover:bg-slate-200'
+                      ? 'bg-obsidian dark:bg-cyan text-white dark:text-obsidian' 
+                      : 'bg-obsidian-100 dark:bg-obsidian-600 text-obsidian-400 dark:text-obsidian-300 hover:bg-obsidian-200 dark:hover:bg-obsidian-500'
                     }`}
                 >
                   <type.icon className="w-4 h-4" />
@@ -173,16 +173,16 @@ const QuickAdd = ({ isOpen, onClose }: QuickAddProps) => {
                 <button
                   onClick={handleSubmit}
                   disabled={!input.trim() || isSubmitting}
-                  className="absolute right-3 bottom-3 w-8 h-8 rounded-lg bg-champagne hover:bg-champagne-400 
-                             disabled:bg-slate-200 disabled:text-slate-400
+                  className="absolute right-3 bottom-3 w-8 h-8 rounded-lg bg-cyan hover:bg-cyan-400 
+                             disabled:bg-obsidian-200 dark:disabled:bg-obsidian-500 disabled:text-obsidian-400
                              flex items-center justify-center transition-colors"
                 >
-                  <Send className="w-4 h-4 text-midnight" />
+                  <Send className="w-4 h-4 text-obsidian" />
                 </button>
               </div>
 
               {activeType === 'quick' && (
-                <p className="text-xs text-midnight-300 mt-3">
+                <p className="text-xs text-obsidian-400 dark:text-obsidian-300 mt-3">
                   💡 Try natural language: "Buy groceries by Friday" or "Schedule dentist appointment"
                 </p>
               )}

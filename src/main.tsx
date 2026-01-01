@@ -5,14 +5,19 @@ import { StatusBar, Style } from '@capacitor/status-bar'
 import { Keyboard } from '@capacitor/keyboard'
 import App from './App'
 import './index.css'
+import { useThemeStore } from './stores/themeStore'
+
+// Initialize theme before React renders to prevent flash
+useThemeStore.getState().initializeTheme()
 
 // Initialize native plugins
 const initializeApp = async () => {
   if (Capacitor.isNativePlatform()) {
-    // Configure status bar for iOS
+    // Configure status bar for iOS - adapt based on theme
+    const resolvedTheme = useThemeStore.getState().resolvedTheme
     try {
-      await StatusBar.setStyle({ style: Style.Light })
-      await StatusBar.setBackgroundColor({ color: '#0F172A' })
+      await StatusBar.setStyle({ style: resolvedTheme === 'dark' ? Style.Dark : Style.Light })
+      await StatusBar.setBackgroundColor({ color: resolvedTheme === 'dark' ? '#050505' : '#FFFFFF' })
     } catch (e) {
       // Status bar not available on all platforms
     }

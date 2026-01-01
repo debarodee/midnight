@@ -25,56 +25,56 @@ const domainConfig: Record<DomainType, { icon: any; label: string; color: string
     icon: Heart, 
     label: 'Health', 
     color: 'text-red-500', 
-    bg: 'bg-red-50',
+    bg: 'bg-red-50 dark:bg-red-500/20',
     description: 'Track appointments, medications, and wellness checkups' 
   },
   finance: { 
     icon: DollarSign, 
     label: 'Finances', 
     color: 'text-green-500', 
-    bg: 'bg-green-50',
+    bg: 'bg-green-50 dark:bg-green-500/20',
     description: 'Manage bills, budgets, and financial goals' 
   },
   home: { 
     icon: Home, 
     label: 'Home', 
     color: 'text-orange-500', 
-    bg: 'bg-orange-50',
+    bg: 'bg-orange-50 dark:bg-orange-500/20',
     description: 'Home maintenance and improvement tasks' 
   },
   auto: { 
     icon: Car, 
     label: 'Auto', 
     color: 'text-blue-500', 
-    bg: 'bg-blue-50',
+    bg: 'bg-blue-50 dark:bg-blue-500/20',
     description: 'Vehicle registration, insurance, and maintenance' 
   },
   relationships: { 
     icon: Users, 
     label: 'Relationships', 
     color: 'text-pink-500', 
-    bg: 'bg-pink-50',
+    bg: 'bg-pink-50 dark:bg-pink-500/20',
     description: 'Birthdays, anniversaries, and check-ins' 
   },
   career: { 
     icon: Briefcase, 
     label: 'Career', 
     color: 'text-indigo-500', 
-    bg: 'bg-indigo-50',
+    bg: 'bg-indigo-50 dark:bg-indigo-500/20',
     description: 'Reviews, goals, and professional development' 
   },
   wellness: { 
     icon: Brain, 
     label: 'Wellness', 
     color: 'text-teal-500', 
-    bg: 'bg-teal-50',
+    bg: 'bg-teal-50 dark:bg-teal-500/20',
     description: 'Mental health, self-care, and mindfulness' 
   },
   pets: { 
     icon: PawPrint, 
     label: 'Pets', 
     color: 'text-amber-500', 
-    bg: 'bg-amber-50',
+    bg: 'bg-amber-50 dark:bg-amber-500/20',
     description: 'Pet care, vet visits, and supplies' 
   },
 };
@@ -90,8 +90,8 @@ const Domains = () => {
   return (
     <div className="p-4 lg:p-8 max-w-5xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-2xl lg:text-3xl font-bold text-midnight mb-1">Life Domains</h1>
-        <p className="text-midnight-300">
+        <h1 className="text-2xl lg:text-3xl font-bold text-obsidian dark:text-white mb-1">Life Domains</h1>
+        <p className="text-obsidian-400 dark:text-obsidian-300">
           Organize and track all areas of your life
         </p>
       </div>
@@ -115,13 +115,13 @@ const Domains = () => {
                 <div className={`w-12 h-12 rounded-2xl ${config.bg} flex items-center justify-center mb-4`}>
                   <config.icon className={`w-6 h-6 ${config.color}`} />
                 </div>
-                <h3 className="font-semibold text-midnight mb-1">{config.label}</h3>
-                <p className="text-sm text-midnight-300 mb-4">{config.description}</p>
+                <h3 className="font-semibold text-obsidian dark:text-white mb-1">{config.label}</h3>
+                <p className="text-sm text-obsidian-400 dark:text-obsidian-300 mb-4">{config.description}</p>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-midnight-400">
+                  <span className="text-sm text-obsidian-400 dark:text-obsidian-300">
                     {itemCount} {itemCount === 1 ? 'item' : 'items'}
                   </span>
-                  <ChevronRight className="w-5 h-5 text-midnight-300" />
+                  <ChevronRight className="w-5 h-5 text-obsidian-300 dark:text-obsidian-400" />
                 </div>
               </Link>
             </motion.div>
@@ -174,16 +174,16 @@ const DomainDetail = ({ domainType }: { domainType: DomainType }) => {
       <div className="flex items-center gap-4 mb-8">
         <Link
           to="/app/domains"
-          className="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center hover:bg-slate-200 transition-colors"
+          className="w-10 h-10 rounded-xl bg-obsidian-100 dark:bg-obsidian-600 flex items-center justify-center hover:bg-obsidian-200 dark:hover:bg-obsidian-500 transition-colors"
         >
-          <ChevronRight className="w-5 h-5 text-midnight rotate-180" />
+          <ChevronRight className="w-5 h-5 text-obsidian dark:text-white rotate-180" />
         </Link>
         <div className={`w-12 h-12 rounded-2xl ${config.bg} flex items-center justify-center`}>
           <config.icon className={`w-6 h-6 ${config.color}`} />
         </div>
         <div className="flex-1">
-          <h1 className="text-2xl font-bold text-midnight">{config.label}</h1>
-          <p className="text-midnight-300">{items.length} items tracked</p>
+          <h1 className="text-2xl font-bold text-obsidian dark:text-white">{config.label}</h1>
+          <p className="text-obsidian-400 dark:text-obsidian-300">{items.length} items tracked</p>
         </div>
         <button onClick={() => setShowAddModal(true)} className="btn-primary">
           <Plus className="w-5 h-5 mr-2" />
@@ -218,19 +218,19 @@ const DomainDetail = ({ domainType }: { domainType: DomainType }) => {
                   <config.icon className={`w-5 h-5 ${config.color}`} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h4 className="font-medium text-midnight">{item.title}</h4>
-                  <p className="text-sm text-midnight-300 capitalize">{item.type}</p>
+                  <h4 className="font-medium text-obsidian dark:text-white">{item.title}</h4>
+                  <p className="text-sm text-obsidian-400 dark:text-obsidian-300 capitalize">{item.type}</p>
                   {item.description && (
-                    <p className="text-xs text-midnight-400 mt-0.5">{item.description}</p>
+                    <p className="text-xs text-obsidian-400 dark:text-obsidian-400 mt-0.5">{item.description}</p>
                   )}
                 </div>
                 {item.date && (
-                  <div className="flex items-center gap-1 text-sm text-midnight-400">
+                  <div className="flex items-center gap-1 text-sm text-obsidian-400 dark:text-obsidian-300">
                     <Calendar className="w-4 h-4" />
                     {new Date(item.date).toLocaleDateString()}
                   </div>
                 )}
-                <div className="p-2 rounded-lg text-midnight-200">
+                <div className="p-2 rounded-lg text-obsidian-200 dark:text-obsidian-500">
                   <AlertCircle className="w-4 h-4" />
                 </div>
               </motion.div>
@@ -259,18 +259,18 @@ const DomainDetail = ({ domainType }: { domainType: DomainType }) => {
                 <config.icon className={`w-5 h-5 ${config.color}`} />
               </div>
               <div className="flex-1 min-w-0">
-                <h4 className="font-medium text-midnight">{item.title}</h4>
-                <p className="text-sm text-midnight-300 capitalize">{item.type}</p>
+                <h4 className="font-medium text-obsidian dark:text-white">{item.title}</h4>
+                <p className="text-sm text-obsidian-400 dark:text-obsidian-300 capitalize">{item.type}</p>
               </div>
               {item.date && (
-                <div className="flex items-center gap-1 text-sm text-midnight-400">
+                <div className="flex items-center gap-1 text-sm text-obsidian-400 dark:text-obsidian-300">
                   <Calendar className="w-4 h-4" />
                   {new Date(item.date).toLocaleDateString()}
                 </div>
               )}
               <button
                 onClick={() => deleteDomainItem(domainType, item.id)}
-                className="p-2 rounded-lg hover:bg-red-50 text-midnight-400 hover:text-red-500 transition-colors"
+                className="p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 text-obsidian-400 dark:text-obsidian-300 hover:text-red-500 transition-colors"
               >
                 <AlertCircle className="w-4 h-4" />
               </button>
@@ -282,18 +282,18 @@ const DomainDetail = ({ domainType }: { domainType: DomainType }) => {
       {/* Add Modal */}
       {showAddModal && (
         <>
-          <div className="fixed inset-0 bg-midnight/30 backdrop-blur-sm z-50" onClick={() => setShowAddModal(false)} />
+          <div className="fixed inset-0 bg-obsidian/30 dark:bg-obsidian/50 backdrop-blur-sm z-50" onClick={() => setShowAddModal(false)} />
           <motion.div
             initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             className="fixed bottom-0 left-0 right-0 lg:bottom-auto lg:top-1/2 lg:left-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2
-                       bg-white rounded-t-3xl lg:rounded-3xl shadow-2xl z-50 p-6 lg:w-full lg:max-w-md"
+                       bg-white dark:bg-obsidian-700 rounded-t-3xl lg:rounded-3xl shadow-2xl z-50 p-6 lg:w-full lg:max-w-md"
           >
-            <h2 className="text-xl font-semibold text-midnight mb-6">Add to {config.label}</h2>
+            <h2 className="text-xl font-semibold text-obsidian dark:text-white mb-6">Add to {config.label}</h2>
             
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-midnight mb-2">Title</label>
+                <label className="block text-sm font-medium text-obsidian dark:text-white mb-2">Title</label>
                 <input
                   type="text"
                   value={newItemTitle}
@@ -305,7 +305,7 @@ const DomainDetail = ({ domainType }: { domainType: DomainType }) => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-midnight mb-2">Type</label>
+                <label className="block text-sm font-medium text-obsidian dark:text-white mb-2">Type</label>
                 <div className="flex flex-wrap gap-2">
                   {getItemTypes().map((type) => (
                     <button
@@ -314,7 +314,7 @@ const DomainDetail = ({ domainType }: { domainType: DomainType }) => {
                       className={`px-3 py-1.5 rounded-lg text-sm font-medium capitalize transition-all
                         ${newItemType === type 
                           ? `${config.bg} ${config.color}` 
-                          : 'bg-slate-100 text-midnight-400 hover:bg-slate-200'
+                          : 'bg-obsidian-100 dark:bg-obsidian-600 text-obsidian-400 dark:text-obsidian-300 hover:bg-obsidian-200 dark:hover:bg-obsidian-500'
                         }`}
                     >
                       {type}

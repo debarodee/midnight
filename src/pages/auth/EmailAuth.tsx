@@ -1,8 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Moon, ArrowLeft, Loader2, Mail, Lock, Eye, EyeOff, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Loader2, Mail, Lock, Eye, EyeOff, CheckCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { signUpWithEmail, signInWithEmail, resetPassword } from '../../lib/firebase';
+import Logo from '../../components/common/Logo';
 
 type AuthMode = 'signin' | 'signup' | 'reset';
 
@@ -132,7 +133,7 @@ const EmailAuth = () => {
   const passwordStrength = getPasswordStrength(password);
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
+    <div className="min-h-screen bg-white dark:bg-obsidian-800 flex flex-col">
       {/* Header */}
       <header className="px-6 py-4 safe-top safe-x">
         <button
@@ -143,7 +144,7 @@ const EmailAuth = () => {
               navigate('/login');
             }
           }}
-          className="flex items-center gap-2 text-midnight-400 hover:text-midnight transition-colors"
+          className="flex items-center gap-2 text-obsidian-400 dark:text-obsidian-300 hover:text-obsidian dark:hover:text-white transition-colors"
         >
           <ArrowLeft className="w-5 h-5" />
           <span className="font-medium">Back</span>
@@ -163,15 +164,13 @@ const EmailAuth = () => {
           >
             {/* Logo */}
             <div className="flex flex-col items-center mb-10">
-              <div className="w-14 h-14 rounded-full bg-midnight flex items-center justify-center mb-4">
-                <Moon className="w-7 h-7 text-champagne" />
-              </div>
-              <h1 className="text-xl font-bold text-midnight">
+              <Logo size="lg" className="mb-4" />
+              <h1 className="text-xl font-bold text-obsidian dark:text-white">
                 {mode === 'signin' && 'Welcome back'}
                 {mode === 'signup' && 'Create your account'}
                 {mode === 'reset' && (resetSent ? 'Check your email' : 'Reset your password')}
               </h1>
-              <p className="text-midnight-400 mt-2 text-center">
+              <p className="text-obsidian-400 dark:text-obsidian-300 mt-2 text-center">
                 {mode === 'signin' && 'Sign in with your email'}
                 {mode === 'signup' && 'Enter your details to get started'}
                 {mode === 'reset' && (resetSent 
@@ -184,15 +183,15 @@ const EmailAuth = () => {
             {resetSent ? (
               /* Reset Email Sent Confirmation */
               <div className="text-center space-y-6">
-                <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto">
-                  <CheckCircle className="w-8 h-8 text-green-600" />
+                <div className="w-16 h-16 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto">
+                  <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
                 </div>
-                <p className="text-midnight-600">
+                <p className="text-obsidian-600 dark:text-obsidian-200">
                   If an account exists for <strong>{email}</strong>, you'll receive a password reset link shortly.
                 </p>
                 <button
                   onClick={() => switchMode('signin')}
-                  className="text-sky-500 hover:text-sky-600 font-medium"
+                  className="text-cyan-600 dark:text-cyan hover:text-cyan-700 dark:hover:text-cyan-400 font-medium"
                 >
                   Back to sign in
                 </button>
@@ -202,11 +201,11 @@ const EmailAuth = () => {
               <form onSubmit={handleSubmit} className="space-y-5">
                 {/* Email Input */}
                 <div>
-                  <label className="block text-sm font-medium text-midnight-600 mb-2">
+                  <label className="block text-sm font-medium text-obsidian-600 dark:text-obsidian-200 mb-2">
                     Email
                   </label>
                   <div className="relative">
-                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-midnight-400" />
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-obsidian-400 dark:text-obsidian-300" />
                     <input
                       type="email"
                       value={email}
@@ -215,8 +214,12 @@ const EmailAuth = () => {
                         setError(null);
                       }}
                       placeholder="you@example.com"
-                      className="w-full pl-12 pr-4 py-4 rounded-2xl border border-slate-200 
-                               focus:border-champagne focus:ring-2 focus:ring-champagne/20 
+                      className="w-full pl-12 pr-4 py-4 rounded-2xl 
+                               bg-white dark:bg-obsidian-700
+                               border border-obsidian-200 dark:border-obsidian-500
+                               text-obsidian dark:text-white
+                               placeholder-obsidian-400 dark:placeholder-obsidian-400
+                               focus:border-cyan focus:ring-2 focus:ring-cyan/20 
                                outline-none transition-all"
                       autoFocus
                       autoComplete="email"
@@ -227,11 +230,11 @@ const EmailAuth = () => {
                 {/* Password Input (not shown for reset mode) */}
                 {mode !== 'reset' && (
                   <div>
-                    <label className="block text-sm font-medium text-midnight-600 mb-2">
+                    <label className="block text-sm font-medium text-obsidian-600 dark:text-obsidian-200 mb-2">
                       Password
                     </label>
                     <div className="relative">
-                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-midnight-400" />
+                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-obsidian-400 dark:text-obsidian-300" />
                       <input
                         type={showPassword ? 'text' : 'password'}
                         value={password}
@@ -240,15 +243,19 @@ const EmailAuth = () => {
                           setError(null);
                         }}
                         placeholder={mode === 'signup' ? 'Create a password' : 'Enter your password'}
-                        className="w-full pl-12 pr-12 py-4 rounded-2xl border border-slate-200 
-                                 focus:border-champagne focus:ring-2 focus:ring-champagne/20 
+                        className="w-full pl-12 pr-12 py-4 rounded-2xl 
+                                 bg-white dark:bg-obsidian-700
+                                 border border-obsidian-200 dark:border-obsidian-500
+                                 text-obsidian dark:text-white
+                                 placeholder-obsidian-400 dark:placeholder-obsidian-400
+                                 focus:border-cyan focus:ring-2 focus:ring-cyan/20 
                                  outline-none transition-all"
                         autoComplete={mode === 'signup' ? 'new-password' : 'current-password'}
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-midnight-400 hover:text-midnight"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-obsidian-400 dark:text-obsidian-300 hover:text-obsidian dark:hover:text-white"
                       >
                         {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                       </button>
@@ -264,12 +271,12 @@ const EmailAuth = () => {
                               className={`h-1 flex-1 rounded-full transition-colors ${
                                 level <= passwordStrength.strength
                                   ? passwordStrength.color
-                                  : 'bg-slate-200'
+                                  : 'bg-obsidian-200 dark:bg-obsidian-500'
                               }`}
                             />
                           ))}
                         </div>
-                        <p className="text-xs text-midnight-400">
+                        <p className="text-xs text-obsidian-400 dark:text-obsidian-300">
                           Password strength: {passwordStrength.label}
                         </p>
                       </div>
@@ -280,11 +287,11 @@ const EmailAuth = () => {
                 {/* Confirm Password (only for signup) */}
                 {mode === 'signup' && (
                   <div>
-                    <label className="block text-sm font-medium text-midnight-600 mb-2">
+                    <label className="block text-sm font-medium text-obsidian-600 dark:text-obsidian-200 mb-2">
                       Confirm Password
                     </label>
                     <div className="relative">
-                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-midnight-400" />
+                      <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-obsidian-400 dark:text-obsidian-300" />
                       <input
                         type={showConfirmPassword ? 'text' : 'password'}
                         value={confirmPassword}
@@ -293,15 +300,19 @@ const EmailAuth = () => {
                           setError(null);
                         }}
                         placeholder="Confirm your password"
-                        className="w-full pl-12 pr-12 py-4 rounded-2xl border border-slate-200 
-                                 focus:border-champagne focus:ring-2 focus:ring-champagne/20 
+                        className="w-full pl-12 pr-12 py-4 rounded-2xl 
+                                 bg-white dark:bg-obsidian-700
+                                 border border-obsidian-200 dark:border-obsidian-500
+                                 text-obsidian dark:text-white
+                                 placeholder-obsidian-400 dark:placeholder-obsidian-400
+                                 focus:border-cyan focus:ring-2 focus:ring-cyan/20 
                                  outline-none transition-all"
                         autoComplete="new-password"
                       />
                       <button
                         type="button"
                         onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 text-midnight-400 hover:text-midnight"
+                        className="absolute right-4 top-1/2 -translate-y-1/2 text-obsidian-400 dark:text-obsidian-300 hover:text-obsidian dark:hover:text-white"
                       >
                         {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                       </button>
@@ -318,7 +329,7 @@ const EmailAuth = () => {
                     <button
                       type="button"
                       onClick={() => switchMode('reset')}
-                      className="text-sm text-sky-500 hover:text-sky-600 font-medium"
+                      className="text-sm text-cyan-600 dark:text-cyan hover:text-cyan-700 dark:hover:text-cyan-400 font-medium"
                     >
                       Forgot password?
                     </button>
@@ -329,8 +340,8 @@ const EmailAuth = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-4 rounded-full bg-midnight text-white font-medium
-                           hover:bg-midnight-600 transition-colors
+                  className="w-full py-4 rounded-full bg-obsidian dark:bg-obsidian-600 text-white font-medium
+                           hover:bg-obsidian-600 dark:hover:bg-obsidian-500 transition-colors
                            disabled:opacity-50 disabled:cursor-not-allowed
                            flex items-center justify-center gap-2"
                 >
@@ -355,33 +366,33 @@ const EmailAuth = () => {
                   <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    className="p-4 rounded-2xl bg-red-50 border border-red-100"
+                    className="p-4 rounded-2xl bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800"
                   >
-                    <p className="text-red-600 text-sm text-center">{error}</p>
+                    <p className="text-red-600 dark:text-red-400 text-sm text-center">{error}</p>
                   </motion.div>
                 )}
 
                 {/* Mode switch */}
                 <div className="text-center pt-4">
                   {mode === 'signin' && (
-                    <p className="text-midnight-400">
+                    <p className="text-obsidian-400 dark:text-obsidian-300">
                       Don't have an account?{' '}
                       <button
                         type="button"
                         onClick={() => switchMode('signup')}
-                        className="text-sky-500 hover:text-sky-600 font-medium"
+                        className="text-cyan-600 dark:text-cyan hover:text-cyan-700 dark:hover:text-cyan-400 font-medium"
                       >
                         Sign up
                       </button>
                     </p>
                   )}
                   {mode === 'signup' && (
-                    <p className="text-midnight-400">
+                    <p className="text-obsidian-400 dark:text-obsidian-300">
                       Already have an account?{' '}
                       <button
                         type="button"
                         onClick={() => switchMode('signin')}
-                        className="text-sky-500 hover:text-sky-600 font-medium"
+                        className="text-cyan-600 dark:text-cyan hover:text-cyan-700 dark:hover:text-cyan-400 font-medium"
                       >
                         Sign in
                       </button>
